@@ -1,0 +1,30 @@
+h1{
+	color: #e59400;font-size:100px; 
+	text-align:center; 
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+body{
+
+	/*text-align:center;*/
+	font-size: 15pt;
+    background: white url(http://i68.photobucket.com/albums/i7/newphew92/bagel_zps29e40f4c.jpg) no-repeat top center;
+    /*          bg colour image         repeat-y: repeat on yaxis; bg position*/
+
+}
+
+a{
+	font-size: 20pt;
+
+	/*display: block;*/
+	/*why the hell does display block works this way*/
+	text-align: center;
+}
+
+a:hover{
+	color: lime;
+	}
+
+#menu{
+	text-align: left;
+}
