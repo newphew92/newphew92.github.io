@@ -1,20 +1,41 @@
+
+
 h1{
-	color: #e59400;font-size:100px; 
+	font-family: "Times New Roman", serif;
+	border: 1px black solid;
+	border-radius: 6px;
+	background-color: rgba(192,192,192,0.5); /*transparent gray*/
+	
+	color: #e59400;
+	font-size:100px; 
 	text-align:center; 
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 body{
-
+	font-family: "Calibri", sans-serif;
+	margin: 20px;
 	/*text-align:center;*/
-	font-size: 15pt;
-    background: white url(http://i68.photobucket.com/albums/i7/newphew92/bagel_zps29e40f4c.jpg) no-repeat top center;
+	font-size: 13pt;
+    background: white url(http://i68.photobucket.com/albums/i7/newphew92/fd3b869e-122d-4361-9889-50cf85e17d0f_zps5d4d4153.jpg) no-repeat top center;
     /*          bg colour image         repeat-y: repeat on yaxis; bg position*/
 
 }
 
+p{
+	border: 1px black solid;
+	border-radius: 6px;
+	background-color: rgba(200,200,200,0.8);
+
+}
+
+li{
+	list-style: none;
+	font-size:12pt;
+
+}
 a{
-	font-size: 20pt;
+	font-size: 15pt;
 
 	/*display: block;*/
 	/*why the hell does display block works this way*/
@@ -22,9 +43,24 @@ a{
 }
 
 a:hover{
-	color: lime;
+	color: green;
 	}
 
 #menu{
+	text-align: center;
+	font-size: 12pt;
+	border: black solid;
+	margin: 5%;
+	background-color: white;
+}
+
+.right{
+	float:right;
+	font-size: 15pt;
+}
+
+.submitButton{
 	text-align: left;
+width: 200px; height: 60px;
+font-size: larger;
 }
