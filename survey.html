@@ -2,18 +2,62 @@
 <link rel="stylesheet" href="surveyStyle.css">
 <head>
 	<link rel="shortcut icon" href="http://i68.photobucket.com/albums/i7/newphew92/bagel_zps29e40f4c.jpg">
-	<h1>Survey Creation</h1>
+	<h1>Survey</h1>
 </head>
 <BODY>
 	<p>
-		Directions on how to create a survey and derpaderpa derp
+		Question 1: tomatoes are a fruit
+	</p>
+	<form action="/cgi-bin/surveyIntake.py" method="post">
+		
+		<input type="radio" name="choice" value="stronglyAgree"> Strongly Agree<br>
+		<input type="radio" name="choice" value="agree"> Agree<br>
+		<input type="radio" name="choice" value="disagree"> Disagree<br>
+		<input type="radio" name="choice" value="stronglyDisagree"> Strongly Disagree<br>
+		<input type= "submit">
+	</form>
+		<p>
+		Question 2: brownies are fruits
 	</p>
 	<form action="">
-		<input type="radio" name="choice" value="Strongly Agree">Strongly Agreed<br>
-		<input type="radio" name="choice" value="Agree">Agreed<br>
+		
+		<input type="radio" name="choice" value="Strongly Agree"> Strongly Agree<br>
+		<input type="radio" name="choice" value="Agree"> Agree<br>
 		<input type="radio" name="choice" value="Disagree"> Disagree<br>
 		<input type="radio" name="choice" value="Strongly Disagree"> Strongly Disagree<br>
 	</form>
-
+		<p>
+		Question 3: Cancer causes autism
+	</p>
+	<form action="">
+		
+		<input type="radio" name="choice" value="stronglyAgree"> Strongly Agree<br>
+		<input type="radio" name="choice" value="agree"> Agree<br>
+		<input type="radio" name="choice" value="disagree"> Disagree<br>
+		<input type="radio" name="choice" value="stronglyDisagree"> Strongly Disagree<br>
+	</form>	
+	<p>
+		Question 4: houses are small
+	</p>
+	<form action="">
+		
+		<input type="radio" name="choice" value="Strongly Agree"> Strongly Agree<br>
+		<input type="radio" name="choice" value="Agree"> Agree<br>
+		<input type="radio" name="choice" value="Disagree"> Disagree<br>
+		<input type="radio" name="choice" value="Strongly Disagree"> Strongly Disagree<br>
+	</form>
+		<p>
+		Question 5: Satan is red
+	</p>
+	<form action="">
+		
+		<input type="radio" name="choice" value="Strongly Agree"> Strongly Agree<br>
+		<input type="radio" name="choice" value="Agree"> Agree<br>
+		<input type="radio" name="choice" value="Disagree"> Disagree<br>
+		<input type="radio" name="choice" value="Strongly Disagree"> Strongly Disagree<br>
+	</form>
+	<form action="results.html">
+	<input type="submit" name="finish" value="Submit" style="font-size:20px">
+</form>
 	<a href="welcome.html">Return to homepage</a>
 </BODY>
