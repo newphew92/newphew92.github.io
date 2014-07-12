@@ -1,0 +1,114 @@
+            <div class="screens">
+            <div class="small-screen-left"><img class="element_from_left" src="images/small_left_screen.png" alt="" /></div>		
+			<div class="small-screen-right"><img class="element_from_right" src="images/small_right_screen.png" alt="" /></div>
+            <div class="big-screen"><img class="element_fade_in" src="images/big_screen.png" alt="" /></div>
+            </div>
+			
+
+    <!-- Switch Panel -->
+    <div id="switch">
+        <div class="content-switcher" >        
+        
+        <h4>Style Options</h4>
+        
+        <p>Color Skins:</p>
+        
+        <ul class="header">            
+            <li><a href="#" onClick="setActiveStyleSheet('gray'); return false;" class="button color switch" style="background-color:#222222"></a></li>
+            <li><a href="#" onClick="setActiveStyleSheet('green'); return false;" class="button color switch" style="background-color:#7cb91c"></a></li>
+            <li><a href="#" onClick="setActiveStyleSheet('red'); return false;" class="button color switch" style="background-color:#e93735"></a></li>
+            <li><a href="#" onClick="setActiveStyleSheet('blue'); return false;" class="button color switch" style="background-color:#00a8ff"></a></li>
+            <li><a href="#" onClick="setActiveStyleSheet('yellow'); return false;" class="button color switch" style="background-color:#f1c40f"></a></li>
+        </ul>      
+        
+        
+        <p>Header Layouts:</p>
+        
+        <div class="styled-select">
+        <select id="navigation1">		  
+		  <option value="1" selected="selected">Default</option>
+          <option value="2">Dark</option>
+		  <option value="3">White</option>
+          <option value="4">Mixed</option>
+		</select>
+        </div>
+        
+        
+        <p>Home Page Templates:</p>
+        
+        <div class="styled-select">
+        <select onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">		  
+		  <option value="index-2.html">Image Pattern</option>
+          <option value="index-1.html">Full Screen Slider</option>
+		  <option selected="selected">Full Width Parallax Slider</option>
+          <option value="index-4.html">Full Screen Image Parallax</option>
+		</select>
+        </div>
+        
+        <div class="clear"></div>
+        <div id="hide"><img  src="images/close.png" alt="" /> </div>
+        </div>
+        </div>
+        
+        <div id="show" style="display: block;">
+        <div id="setting"></div>
+    </div>
+    <!-- Switch Panel -->
+	
+	
+	
+
+   <!-- Clients-->
+	<section id="clients" class="content">
+    	
+        <!-- Container -->
+		<div class="container">
+			
+            <!-- Section Title -->
+            <div class="section-title">
+                <h1>Clients</h1>
+                <span class="border"></span>
+                <p>We work with great brands. Close partnerships with really cool clients let us do world-class work.</p>
+            </div>				
+			<!--/Section Title -->
+            
+            
+            <!-- Clients Slider -->
+            <div id="bx-pager">
+                <a data-slide-index="0" href="#"><img src="images/client1.png" alt="" /></a>
+                <a data-slide-index="1" href="#"><img src="images/client2.png" alt="" /></a>
+                <a data-slide-index="2" href="#"><img src="images/client3.png" alt="" /></a>
+                <a data-slide-index="3" href="#"><img src="images/client4.png" alt="" /></a>
+            </div>
+            
+            <ul class="clients-slider">
+                <li><h3>"1"</h3>
+                  <p>- 1 -</p>
+                </li>
+                <li><h3>"2"</h3>
+                  <p>- 2 -</p>
+                </li>
+            </ul>
+            <!--/Clients Slider -->
+            
+    
+    	</div>
+        <!--/Container -->
+        
+	</section>	
+	<!--/Clients-->
+    
+    
+    
+    
+action="http://clapat.ro/themes/newave/contact.php"    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
