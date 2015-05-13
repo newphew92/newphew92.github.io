@@ -1,1 +1,0 @@
-<div class="bar-wrap"><span data-width="80"><strong>Unique Experience</strong></span></div>
