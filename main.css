@@ -1,19 +1,24 @@
 body {
 	padding: 0; /* Gets rid of the automatic padding */
 	margin: 0;	/*	on HTML documents */
+	padding-top: 0;
 	font-family: Lucida Grande, Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	background-color: white;
 }
 
+h2{
+	text-align: center;
+}
+
 #navigation {
-	z-index: 2;
+	z-index: 3;
 	min-width: 384px;
 	position: fixed;
 	top: 0;
 	width: 100%;
 	color: #ffffff;
-	height: 35px;
+	height: 45px;
 	text-align: center;
 	padding-top: 15px;
 	/* Adds shadow to the bottom of the bar */
@@ -80,6 +85,9 @@ body {
 	padding-right: auto;
 }
 .jumbotron{
+	padding: 0;
+	margin: 0;
+	padding-top: 60px;
 	background-color:transparent;
 	text-align: center;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
