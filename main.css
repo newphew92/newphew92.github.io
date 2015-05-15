@@ -6,27 +6,29 @@ body {
 	font-size: 12px;
 	background-color: white;
 }
-
+h1{
+	margin-bottom: 0px;
+}
 h2{
 	text-align: center;
 }
 
 #navigation {
 	z-index: 3;
-	min-width: 384px;
+	/*min-width: 384px;*/
 	position: fixed;
 	top: 0;
 	width: 100%;
 	color: #ffffff;
-	height: 45px;
-	text-align: center;
-	padding-top: 15px;
+	/*height: 45px;*/
+	/*text-align: center;*/
+	/*padding-top: 15px;*/
 	/* Adds shadow to the bottom of the bar */
-	-webkit-box-shadow: 0px 0px 8px 0px #000000;
+	/*-webkit-box-shadow: 0px 0px 8px 0px #000000;
 	-moz-box-shadow: 0px 0px 8px 0px #000000;
-	box-shadow: 0px 0px 8px 0px #000000;
+	box-shadow: 0px 0px 8px 0px #000000;*/
 	/* Adds the transparent background */
-	background: rgba(73,155,234,1);
+	/*background: rgba(73,155,234,1);*/
 	/*background: -moz-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(24,52,194,1) 100%);*/
 	/*background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(73,155,234,1)), color-stop(100%, rgba(24,52,194,1)));*/
 	/*background: -webkit-linear-gradient(top, rgba(73,155,234,1) 0%, rgba(24,52,194,1) 100%);*/
@@ -37,13 +39,26 @@ h2{
 }
 
 #navigation a {
+	
+	display: block;
 	font-size: 14px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 11px;
+	padding-right: 11px;
+	height: 17px;
+	max-height: 17px;
+
 	color: white;
 	text-decoration: none;
 }
-
+#navigation div{
+	height: 45px;
+	text-align: center;
+	-webkit-box-shadow: 0px 4px 5px -2px #000000;
+	-moz-box-shadow: 0px 4px 5px -2px #000000;
+	box-shadow: 0px 4px 5px -2px #000000;
+	padding-top: 15px;
+	background: rgba(73,155,234,1);
+}
 #navigation a:hover {
 	color: grey;
 }
@@ -87,7 +102,8 @@ h2{
 .jumbotron{
 	padding: 0;
 	margin: 0;
-	padding-top: 60px;
+	padding-top: 80px;
+	padding-bottom: 0px;
 	background-color:transparent;
 	text-align: center;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
