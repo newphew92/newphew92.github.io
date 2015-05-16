@@ -18,7 +18,9 @@ h2{
 h3{
 	text-align: left;
 }
-
+/*div{
+	text-align: center;
+}*/
 #navigation {
 	z-index: 3;
 	/*min-width: 384px;*/
@@ -44,10 +46,23 @@ h3{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#1834c2', GradientType=0 );
 }
 
+@media (max-width: 850px) {
+    p{font-size: 20px;}
+    body{font-size: 24px;}
+    a{display: block;font-size:20px;}
+
+}
+
+@media (max-width: @screen-sm) {
+    body{
+    	
+    	font-size: 14px;}
+}
+
 #navigation a {
 	
 	display: block;
-	font-size: 14px;
+	font-size: auto;
 	padding-left: 11px;
 	padding-right: 11px;
 	height: 17px;
@@ -56,6 +71,8 @@ h3{
 	color: white;
 	text-decoration: none;
 }
+
+
 #navigation div{
 	height: 45px;
 	text-align: center;
@@ -91,11 +108,29 @@ h3{
 	width: 600px;
 	height: 600px;
 }
-#portrait{
-	/*float:left;*/
+@media (max-width: 850px) {
+	#portrait {
+		text-align: center;
+		
+	}
+	.img-center{
+		margin:0 auto;
+	}
+
+}
+div#portrait{
 	text-align: center;
+} 
+
+#portrait img {
+	/*float:left;*/
+	
 	/*margin-top: 80px;*/
 	/*margin-left: 20%;*/
+	
+	width: 20em; 
+	height:24em; 
+	border-radius: 0.5em;
 }
 #title {
 	font-size: 25px;
