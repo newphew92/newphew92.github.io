@@ -56,7 +56,8 @@ h3{
 @media (max-width: @screen-sm) {
     body{
     	
-    	font-size: 14px;}
+    	font-size: 14px;
+    }
 }
 
 #navigation a {
@@ -76,9 +77,9 @@ h3{
 #navigation div{
 	height: 45px;
 	text-align: center;
-	-webkit-box-shadow: 0px 4px 5px -2px #000000;
+	/*-webkit-box-shadow: 0px 4px 5px -2px #000000;
 	-moz-box-shadow: 0px 4px 5px -2px #000000;
-	box-shadow: 0px 4px 5px -2px #000000;
+	box-shadow: 0px 4px 5px -2px #000000;*/
 	padding-top: 15px;
 	background: rgba(73,155,234,1);
 }
@@ -109,8 +110,11 @@ h3{
 	height: 600px;
 }
 @media (max-width: 850px) {
-	#portrait {
-		text-align: center;
+	#portrait img{
+		/*text-align: center;*/
+		width: 100%; 
+		/*height:18em; */
+		border-radius: 0.5em;
 		
 	}
 	.img-center{
@@ -118,10 +122,8 @@ h3{
 	}
 
 }
-div#portrait{
-	text-align: center;
-} 
 
+@media (min-width: 851px) {
 #portrait img {
 	/*float:left;*/
 	
@@ -132,6 +134,11 @@ div#portrait{
 	height:24em; 
 	border-radius: 0.5em;
 }
+}
+div#portrait{
+	text-align: center;
+} 
+
 #title {
 	font-size: 25px;
 	text-align: center;
@@ -139,6 +146,10 @@ div#portrait{
 	padding-bottom: 30px;	
 	padding-left: auto;
 	padding-right: auto;
+}
+
+.cv p{
+	font-family:"PT Serif", serif;
 }
 .jumbotron{
 	padding: 0;
