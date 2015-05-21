@@ -19,6 +19,8 @@ h3{
 	text-align: left;
 }
 h4{
+	margin-top: 0;
+	text-align: left;
 	float:left;
 }
 /*div{
@@ -173,6 +175,6 @@ div#portrait{
 .section-block { margin: 0px 0px 1.5em 2em; display: block; float: left; width: 33em; }
 .section-block p { border-bottom: 1px #bcd dotted; }
 .year {
-	float:left;
+	float:right;
 	font-family:italic,bold;
 }
