@@ -6,8 +6,8 @@ body {
 	font-size: 12px;
 	background-color: white;
 }
-p{
-	font-size: 14px;
+form{
+	text-align: right;
 }
 h1{
 	margin-bottom: 55px;
@@ -33,6 +33,9 @@ hr {
     border-style: inset;
     border-width: 1px;
 } 
+p{
+	font-size: 14px;
+}
 /*div{
 	text-align: center;
 }*/
@@ -163,6 +166,7 @@ div#portrait{
 	padding-left: auto;
 	padding-right: auto;
 }
+
 
 .cv p{
 	font-family:"PT Serif", serif;
