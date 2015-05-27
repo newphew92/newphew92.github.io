@@ -42,17 +42,37 @@
 </head>
 <body>
 	<div class="row-fluid">
+		<div class="col-lg-12 col-md-12 col-xs-12">
+			<!-- moebius strip made by David Kleiman and resized by Joey Litalien -->
+			<img src="./Pictures/moebius.svg" style="height:40%;width:40%;margin-left:auto;margin-right:auto;display:block;">
+		</div>
+	</div>
+	<div class="row-fluid">
 		<!-- in-line styling to simply change the BS row of this particular instance -->
 		<div class="col-lg-6 col-md-12 col-xs-12">
+			<script>
+				function loadXMLDoc()
+				{
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.open("GET","treebuild.js",false);
+				xmlhttp.send();
+				document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+				}
+			</script>
 			<form>
 			
-			<textarea name="Rules" 
-			   rows="5" cols="50">
-			Please enter your special instructions 
-			or comments
+			<textarea name="Rules" rows="5" cols="50">Please enter your special instructions or comments
 			</textarea>
 			<br><br>
-			<input type="submit">
+			<button type="button" onclick="loadXMLDoc()">Change Content</button>
 			<input type="reset">
 			</form>
 		</div>
