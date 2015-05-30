@@ -14,12 +14,12 @@ function getTestPersonaLoginCredentials(callback) {
         response.on('end', function() {
 
             // Data reception is done, do whatever with it!
-            var parsed = JSON.parse(body);
-            callback({
-                email: parsed.email,
-                password: parsed.pass
-            });
+            // var parsed = JSON.parse(body);
+            // callback({
+            //     email: parsed.email,
+            //     password: parsed.pass
+            // });
         });
     });
 
-},
+}
