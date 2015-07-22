@@ -1,0 +1,33 @@
+{
+  "name": "Terrence",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "newphew92 <terrenceko@outlook.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "?"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react-bootstrap-treeview": "~0.1.0",
+    "react-bootstrap": "~0.23.2",
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.3",
+    "react": "~0.13.1"
+  },
+  "resolutions": {
+    "react": ">= 0.13.0"
+  }
+}

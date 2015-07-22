@@ -1,0 +1,31 @@
+{
+  "name": "react-autocomplete",
+  "version": "1.0.2",
+  "authors": [
+    "Atle Frenvik Sveen <atle@frenviksveen.net>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2",
+    "bootstrap": "~3.3.2",
+    "underscore": "~1.8.2"
+  },
+  "homepage": "https://github.com/atlefren/react-autocomplete",
+  "_release": "1.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.2",
+    "commit": "a529a85c111d8c5c0b01b4ff755d856fc196da6c"
+  },
+  "_source": "git://github.com/atlefren/react-autocomplete.git",
+  "_target": "~1.0.2",
+  "_originalSource": "react-autocomplete",
+  "_direct": true
+}

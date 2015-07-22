@@ -1,25 +1,37 @@
+#!/usr/bin/env node
+
+'use strict';
+// chenglou code
+var express = require('express');
+var pg = require('pg');
+var fs = require('fs');
+var bodyParser = require('body-parser');
+var interp = require('./interp');
+
+var app = express();
+app.use(express.static('client'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(function(err, req, res, next) {
+  res.status(500).send('Something broke!');
+});
+// end
+
 var http = require('http');
+console.log("huhuhu");
 
-function getTestPersonaLoginCredentials(callback) {
+var server=http.createServer(function (request,response){
+    response.writeHead(200,{"Content-Type": "text/plain"});
+    response.end("Hello ggggg World\n");
+});
 
-    return http.get({
-        host: 'terrenceko.com',
-        path: '/playground'
-    }, function(response) {
-        // Continuously update stream with data
-        var body = '';
-        response.on('data', function(d) {
-            body += d;
-        });
-        response.on('end', function() {
+http.get("http://localhost:8000/playground.html", function(res) {
+  console.log("Got response: " + res.statusCode);
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});
 
-            // Data reception is done, do whatever with it!
-            // var parsed = JSON.parse(body);
-            // callback({
-            //     email: parsed.email,
-            //     password: parsed.pass
-            // });
-        });
-    });
 
-}
+server.listen(8080);
+
+console.log("8000");
