@@ -33,5 +33,5 @@
   "private": true,
   "scripts": {
     "start": "node ./backend.js"
-  },
+  }
 }
