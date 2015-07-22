@@ -29,3 +29,7 @@ app.get('/login', function (req,res){
 		res.send(text);
 	});
 });
+
+app.get('/playground')
+
+app.get('profile')

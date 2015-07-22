@@ -31,5 +31,8 @@
   "bundleDependencies": [],
 
   "private": true,
-  "main": "server.js"
+  "main": "server.js",
+  "scripts":{
+    "start":"node ./backend.js"
+  },
 }
