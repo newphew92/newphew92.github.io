@@ -19,7 +19,7 @@ app.use ('/admin', admin)
 admin.use(express.static("./"))
 
 app.get('/', function (req,res){
-	fs.readFile('index.html', 'utf8', function (err, text){
+	fs.readFile('login.html', 'utf8', function (err, text){
 		res.send(text);
 	});
 });
