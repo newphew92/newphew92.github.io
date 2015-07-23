@@ -1,6 +1,6 @@
 var express = require('express');
-var bodyParser = require('body-parser')
 var app = express();
+var bodyParser = require('body-parser');
 var cors = require('cors')
 var fs = require('fs')
 var session = require ('express-session')
@@ -30,6 +30,13 @@ app.get('/login', function (req,res){
 	});
 });
 
-app.get('/playground')
 
-app.get('profile')
+app.get('*', function (req,res){
+	fs.readFile('index.html', 'utf8', function (err, text){
+		res.send(text);
+	});
+});
+
+// app.get('/playground')
+
+// app.get('profile')
