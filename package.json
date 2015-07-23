@@ -34,5 +34,5 @@
   "scripts": {
     "start": "node ./backend.js"
   },
-  "main": "backend.js"
+  "main": "server.js"
 }
