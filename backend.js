@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(function(err, req, res, next) {
 	res.status(500).send('Something broke');
 });
-app.listen(8000, function () {console.log('App listening');});
+app.listen(8080, function () {console.log('App listening');});
 app.use ('/admin', admin)
 admin.use(express.static("./"))
 
