@@ -46,6 +46,7 @@ p{
 	top: 0;
 	width: 100%;
 	color: #ffffff;
+	text-align: center;
 	/*height: 45px;*/
 	/*text-align: center;*/
 	/*padding-top: 15px;*/
@@ -88,22 +89,24 @@ p{
 	height: 17px;
 	max-height: 17px;
 
-	color: white;
+	/*color: white;*/
 	text-decoration: none;
 }
+nav.navbar.navbar-default{
+	font-size:14px;
+}
 
-
-#navigation div{
-	height: 45px;
+.navbar-default #navigation div {
+	/*height: 45px;*/
 	text-align: center;
 	/*-webkit-box-shadow: 0px 4px 5px -2px #000000;
 	-moz-box-shadow: 0px 4px 5px -2px #000000;
 	box-shadow: 0px 4px 5px -2px #000000;*/
-	padding-top: 15px;
-	background: rgba(73,155,234,1);
+	/*padding-top: 15px;*/
+	/*background: rgba(73,155,234,1);*/
 }
 #navigation a:hover {
-	color: grey;
+	color: black;
 }
 
 /* This just adds some style to the placeholder text */
@@ -118,17 +121,17 @@ p{
 	margin-right: auto;
 }
 
-#content img {
+/*#content img {
 	padding-top: 20px;
 	padding-bottom: 30px;
-}
+}*/
 
 #svg {
 	text-align: center;
 	width: 600px;
 	height: 600px;
 }
-@media (max-width: 850px) {
+@media  {
 	#portrait img{
 		/*text-align: center;*/
 		width: 100%; 
