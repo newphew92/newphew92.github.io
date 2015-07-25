@@ -28,6 +28,7 @@ var Personal = React.createClass({
 		var url = window.location.href.split("/")
 		console.log(url)
 		var path = (url [url.length-1]).replace(/[#]/,"")
+		if (! path){path = "main"}
 		this.setState({screen:path})
 		// console.log(/.+?(?=\#)/.exec(url))
 		console.log(path)
@@ -132,7 +133,7 @@ var Personal = React.createClass({
 				<br/>
 				<Row>
 					<Col lg = {12} md = {12} xs = {12}>
-						<p>I personally believe that it is important that programmers should all be able to make a simple web page and what better way is there to practice making than having your very own personal web page?
+						<p>I personally believe that it is important that programmers should all be able to make a simple web page and what better way is there to practice than having your very own personal web page?
 						Websites are good for going from theory to practical quickly and increase your exposure to the world.</p>
 						<p>You may think that the navbar leads to other webpages but wait! This is only one single webpage and I'm counting on react to make speedy transitions.
 						This might be annoying if you feel the need to refresh this page often so I'll try to come up with a fix.</p>
