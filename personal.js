@@ -121,7 +121,7 @@ var Personal = React.createClass({
 				</Row>	
 				<Row>
 					<Col lg = {4} lgOffset = {1} md = {4} mdOffset = {1} xs = {12}>
-						<div id = "portrait"><img src = "./Pictures/smallBinocular.jpg" class ="img-responsive"></img></div>
+						<div id = "portrait"><img src = "Pictures/smallBinocular.jpg" class ="img-responsive"></img></div>
 					</Col>
 					<Col lg = {6} md = {6} xs = {12}>
 						<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>		
