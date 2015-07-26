@@ -142,6 +142,20 @@ var Personal = React.createClass({
 				</Row>
 			</Panel>	
 			),
+			moebius: (
+				<Panel>
+					<Row><Col lg = {12} md = {12} xs = {12}><h1>Dave's Moebius Strip</h1></Col></Row>
+						<Row  style = {{textAlign:"center"}}>
+							<Col centered lg = {12} md = {12} xs = {12}>
+									<object type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
+							</Col>
+						</Row>
+						<br/>
+
+							<Row style = {{textAlign:"center"}}><Col lg = {12} md = {12} xs = {12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
+
+				</Panel> 
+			),
 		}	
 		
 		return (
@@ -149,14 +163,14 @@ var Personal = React.createClass({
 			<Navbar toggleNavKey = {0} fixedTop brand={<a href = "#main" onClick = {this.handleScreen.bind(null,'main')}>Terrence Ko</a>}>
 		    <Nav eventKey = {0}>
 		      <NavItem eventKey={2} href = "#profile" onClick = {this.handleScreen.bind(null,'profile')}>About Me</NavItem>
-		      <NavItem eventKey={1} onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		      <DropdownButton eventKey={3} title='Playground'>
-		        <MenuItem eventKey='1' >Action</MenuItem>
+		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
 		        <MenuItem eventKey='2' >Another action</MenuItem>
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		        <MenuItem divider />
 		        <MenuItem eventKey='4' >Separated link</MenuItem>
 		      </DropdownButton>
+		      <NavItem eventKey={1} onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>
 			{screen [this.state.screen]}
