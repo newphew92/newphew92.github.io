@@ -19,7 +19,44 @@ var Personal = React.createClass({
 			this.setState(state)
 			}.bind(this);
 	},
+	organizeGroups:function(list){
+		var b = [];var c = [];
+		for (var i = 1; i<= list.length;i++){
+			b=b.concat(list[i-1])
+			if(i%12 === 0||i === list.length){
+				c = c.concat([b]);  
+				b = [];
+			}
+		}
+		return c;
+	},
+	organize : function (len) {
+		var B = ReactBootstrap;
+		var Row = B.Row,
+			Col = B.Col;
+		var ants = <img src = "Pictures/ant.svg.thumb.png" class ="img-responsive"></img>;
+		var rows = len % 12 + 1;
+		var antlist = [];
+		for (var i = 0; i< len;i++){
+			antlist.push(ants);
+		}
+		var newAnts = this.organizeGroups(antlist);
+		return (
+			<div>
+				{newAnts.map(
+					function (el) {
+						return <Row>{el.map(
+							function (e) {
+								return <Col xs = {1} md = {1} lg = {1}>{e}
+								</Col>
+							}
+						)}</Row>
+					}
+				)}
+			</div>
 
+		)
+	},
 	handleScreen: function(stateName) {
 			this.setState({screen:stateName})
 			// location.hash = '#'+content;
@@ -34,24 +71,6 @@ var Personal = React.createClass({
 		console.log(path)
 		// this.setState({})
 	},
-	renderBody: function(content){
-		console.log(this.state.screen)
-		this.setState ({screen:content},
-			function () {
-				switch (this.state.screen){
-					case "main":
-						return this.renderMain();
-						break;
-					case "profile":
-						console.log('profile')
-						return this.renderMain();
-						break;	
-					default:
-						return this.renderMain();
-				}
-			})
-
-	},
 	render: function(){
 		var B = ReactBootstrap;
 		var Row = B.Row,
@@ -62,6 +81,7 @@ var Personal = React.createClass({
 			MenuItem = B.MenuItem,
 			Panel = B.Panel,
 			NavItem = B.NavItem;
+		
 		var screen = {
 			profile : (
 				<Panel style = {{margin:"5%"}}>
@@ -147,15 +167,22 @@ var Personal = React.createClass({
 					<Row><Col lg = {12} md = {12} xs = {12}><h1>Dave's Moebius Strip</h1></Col></Row>
 						<Row  style = {{textAlign:"center"}}>
 							<Col centered lg = {12} md = {12} xs = {12}>
-									<object type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
+									<object id = "moebius" type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
 							</Col>
 						</Row>
 						<br/>
-
 							<Row style = {{textAlign:"center"}}><Col lg = {12} md = {12} xs = {12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
-
 				</Panel> 
 			),
+			ants:(
+				<Panel>
+					<Row><Col lg = {12} md = {12} xs = {12}><h1>Ants</h1></Col></Row>
+					<Row><Col style = {{textAlign : "center"}} lg = {12} md = {12} xs = {12}><iframe width="560" height="315" src="https://www.youtube.com/embed/hn0DmTNHlEc" frameborder="0" allowfullscreen></iframe></Col></Row>
+					<Row><Col lg = {12} md = {12} xs = {12}><p>I've recently watched a video of ants at war with each other and it reminded me very much of how I keep getting routed by Colossi+storms or mass battlecruisers+tanks in Starcraft 2.
+					I've decided to add one ant per loss in this manner to this page and remove an ant when I win in these situations. I hope the page doesnt' get infested.</p></Col></Row>
+					{this.organize (3)}
+				</Panel>	
+			)
 		}	
 		
 		return (
@@ -165,11 +192,12 @@ var Personal = React.createClass({
 		      <NavItem eventKey={2} href = "#profile" onClick = {this.handleScreen.bind(null,'profile')}>About Me</NavItem>
 		      <DropdownButton eventKey={3} title='Playground'>
 		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
-		        <MenuItem eventKey='2' >Another action</MenuItem>
+		        <MenuItem eventKey='2' href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</MenuItem>
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		        <MenuItem divider />
 		        <MenuItem eventKey='4' >Separated link</MenuItem>
 		      </DropdownButton>
+		      <NavItem eventKey={3} href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</NavItem>
 		      <NavItem eventKey={1} onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>
