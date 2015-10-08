@@ -23,7 +23,7 @@ var Personal = React.createClass({
 		var b = [];var c = [];
 		for (var i = 1; i<= list.length;i++){
 			b=b.concat(list[i-1])
-			if(i%12 === 0||i === list.length){
+			if(i%10 === 0||i === list.length){
 				c = c.concat([b]);  
 				b = [];
 			}
@@ -43,6 +43,7 @@ var Personal = React.createClass({
 		var newAnts = this.organizeGroups(antlist);
 		return (
 			<div>
+				<Row><Col lg = {12} md = {12} xs = {12}><h2>There are {len} Ants</h2></Col></Row>
 				{newAnts.map(
 					function (el) {
 						return <Row>{el.map(
@@ -71,6 +72,18 @@ var Personal = React.createClass({
 		console.log(path)
 		// this.setState({})
 	},
+	cvRow: function(title, date, content) {
+		var B = ReactBootstrap;
+		var Row = B.Row,
+			Col = B.Col;
+
+		return(
+			<div>	
+				<Row><Col lg = {12}><h4>{title}</h4><Date date={date}/></Col></Row>
+				<Row><Col lg = {12}><p>{content}</p></Col></Row>
+			</div>	
+			)
+	},
 	render: function(){
 		var B = ReactBootstrap;
 		var Row = B.Row,
@@ -84,7 +97,7 @@ var Personal = React.createClass({
 		
 		var screen = {
 			profile : (
-				<Panel style = {{margin:"5%"}}>
+				<Panel style = {{margin:"0%"}}>
 					<Row>
 						<Col lg = {10} lgOffset = {1}>
 							<p>I was born in Montreal, Canada in 1992. Growing up, I learned how to play the piano and participated in many competitions until I entered CEGEP (pre-university institution in Quebec, the equivalent of the last year of high school and first year of university). 
@@ -96,39 +109,31 @@ var Personal = React.createClass({
 					</Row>
 					<Row><Col lg = {12}><h2>Curriculum Vitae (Abridged)</h2></Col></Row>
 					<Row>
-						<Col lg = {4} lgOffset = {2} xs = {12}><h3>Education</h3></Col>
-						<Col lg = {4}>
-							<Row><Col lg = {12}><h4>Mcgill University</h4><Date date="2012-2016"/></Col></Row>
-							<Row><Col lg = {12}><p>Bachelor of Science: Liberal Degree (Core Anatomy and Cell Biology and Computer Science)</p></Col></Row>
-							<Row><Col lg = {12}><h4>College Jean-de-Brebeuf (CEGEP)</h4><Date date = {"2010-2012"}/></Col></Row>
-							<Row><Col lg = {12}><p>DEC in Health Sciences</p></Col></Row>
-							<Row><Col lg = {12}><h4>College Jean-de-Brebeuf (Secondary)</h4><Date date = {"2004-2010"}/></Col></Row>
-							<Row><Col lg = {12}><p>Highschool Diploma</p></Col></Row></Col>
-					</Row>
-					<Row><Col lg = {8} lgOffset = {2}><hr/></Col></Row>
-					<Row><Col lg = {4} lgOffset = {2} xs = {12}><h3>Work Experience</h3></Col>
-						<Col lg = {4}>
-							<Row><Col lg = {12}><h4>Sushi Shop</h4><Date date = {"Summer 2012"}/></Col></Row>
-							<Row><Col lg = {12}><p>Sous-chef</p></Col></Row>
-							<Row><Col lg = {12}> <h4>Heart of the City Piano Program</h4><Date date = {"2012-2013"}/></Col></Row>
-							<Row><Col lg = {12}><p>Piano Teacher</p></Col></Row>
+						<Col lg = {5} lgOffset = {1} xs = {12}><h3>Education</h3></Col>
+						<Col lg = {5}>
+							{this.cvRow("Mcgill University","2012-2016","Bachelor of Science: Liberal Degree (Core Anatomy and Cell Biology and Computer Science)")}
+							{this.cvRow("College Jean-de-Brebeuf (CEGEP)","2010-2012","DEC in Health Sciences")}
+							{this.cvRow("College Jean-de-Brebeuf (Secondary)","2004-2010","Highschool Diploma")}
 						</Col>
-						<Col lg = {3}></Col>
+						<Col lg = {1}></Col>
 					</Row>
-					<Row><Col lg = {8} lgOffset = {2}><hr/></Col></Row>
+					<Row><Col lg = {8} lgOffset = {1}><hr/></Col></Row>
+					<Row><Col lg = {5} lgOffset = {1} xs = {12}><h3>Work Experience</h3></Col>
+						<Col lg = {5}>
+							{this.cvRow("Sushi Shop","Summer 2012","Sous-chef")}
+							{this.cvRow("Heart of the City Piano Program","2012-2013","Piano Teacher")}
+						</Col>
+						<Col lg = {1}></Col>
+					</Row>
+					<Row><Col lg = {8} lgOffset = {1}><hr/></Col></Row>
 					<Row>
-				     <Col lg = {4} lgOffset = {2} xs = {12}><h3>Competitions and Awards</h3></Col>
-				     <Col lg = {4}>
-				      <Row><Col lg = {12}><h4>McHacks</h4><Date date = {"Summer 2015"}/></Col></Row>
-				    	<Row><Col lg = {12}><p>My team and I attempted to create an app that would take advantage of modern cellphone cameras and scan a deck of cards being rifled through. 
-				    	Such information would be used to cheat in card games.</p></Col></Row>
-				      <Row><Col lg = {12}><h4>Mcgill CodeJam:Artificial Intelligience (final round finish)</h4><Date date = {"2014"}/></Col></Row>
-				      <Row><Col lg = {12}><p>The goal of this competition was to come up with a facial recognition algorithm that would 
-				      identify black and white pictures of people without the aid of packages related to facial recognition.</p></Col></Row>
-					    <Row><Col lg = {12}><h4>Mcgill Dobson Cup Entrepreneurial Start-up competition (second round finish)</h4><Date date = {"2014"}/></Col></Row>
-				    	<Row><Col lg = {12}><p>The Dobson cup aims to provide funding to the winning startup</p></Col></Row>
+				     <Col lg = {5} lgOffset = {1} xs = {12}><h3>Competitions and Awards</h3></Col>
+				     <Col lg = {5}>
+				      {this.cvRow("McHacks","Summer 2015","My team and I attempted to create an app that would take advantage of modern cellphone cameras and scan a deck of cards being rifled through. Such information would be used to cheat in card games.")}
+				      {this.cvRow("Mcgill CodeJam:Artificial Intelligience (final round finish)","2014","The goal of this competition was to come up with a facial recognition algorithm that would identify black and white pictures of people without the aid of packages related to facial recognition.")}
+					    {this.cvRow("Mcgill Dobson Cup Entrepreneurial Start-up competition (second round finish)","2014","The Dobson cup aims to provide funding to the winning startup")}
 				   	</Col>
-				   	<Col lg = {3}></Col>
+				   	<Col lg = {1}></Col>
 				  </Row>
 				   </Panel> 
 			),
@@ -182,7 +187,7 @@ var Personal = React.createClass({
 					I've decided to add one ant per loss in this manner to this page and remove an ant when I win in these situations. I hope the page doesnt' get infested.</p></Col></Row>
 					{this.organize (3)}
 				</Panel>	
-			)
+			),
 		}	
 		
 		return (
@@ -192,13 +197,12 @@ var Personal = React.createClass({
 		      <NavItem eventKey={2} href = "#profile" onClick = {this.handleScreen.bind(null,'profile')}>About Me</NavItem>
 		      <DropdownButton eventKey={3} title='Playground'>
 		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
-		        <MenuItem eventKey='2' href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</MenuItem>
-		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		        <MenuItem divider />
-		        <MenuItem eventKey='4' >Separated link</MenuItem>
+		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
 		      <NavItem eventKey={3} href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</NavItem>
-		      <NavItem eventKey={1} onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
+		      <NavItem eventKey={4} href = "http://us.battle.net/sc2/en/profile/2145980/1/newphew/">Starcraft</NavItem>
+		      <NavItem eventKey={1} href = "#graveyard" onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>
 			{screen [this.state.screen]}
