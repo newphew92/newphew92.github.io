@@ -13,19 +13,25 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
   var _BootstrapMixin2 = _interopRequireDefault(_BootstrapMixin);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var NavItem = _React['default'].createClass({
     displayName: 'NavItem',
 
     mixins: [_BootstrapMixin2['default']],
 
     propTypes: {
+      linkId: _React['default'].PropTypes.string,
       onSelect: _React['default'].PropTypes.func,
       active: _React['default'].PropTypes.bool,
       disabled: _React['default'].PropTypes.bool,
       href: _React['default'].PropTypes.string,
+      role: _React['default'].PropTypes.string,
       title: _React['default'].PropTypes.node,
       eventKey: _React['default'].PropTypes.any,
-      target: _React['default'].PropTypes.string
+      target: _React['default'].PropTypes.string,
+      'aria-controls': _React['default'].PropTypes.string
     },
 
     getDefaultProps: function getDefaultProps() {
@@ -36,38 +42,42 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
     render: function render() {
       var _props = this.props;
+      var role = _props.role;
+      var linkId = _props.linkId;
       var disabled = _props.disabled;
       var active = _props.active;
       var href = _props.href;
       var title = _props.title;
       var target = _props.target;
       var children = _props.children;
+      var ariaControls = _props['aria-controls'];
 
-      var props = _objectWithoutProperties(_props, ['disabled', 'active', 'href', 'title', 'target', 'children']);
+      var props = _objectWithoutProperties(_props, ['role', 'linkId', 'disabled', 'active', 'href', 'title', 'target', 'children', 'aria-controls']);
 
-      // eslint-disable-line object-shorthand
       var classes = {
         active: active,
         disabled: disabled
       };
       var linkProps = {
+        role: role,
         href: href,
         title: title,
         target: target,
+        id: linkId,
         onClick: this.handleClick,
         ref: 'anchor'
       };
 
-      if (href === '#') {
+      if (!role && href === '#') {
         linkProps.role = 'button';
       }
 
       return _React['default'].createElement(
         'li',
-        _extends({}, props, { className: (0, _classNames['default'])(props.className, classes) }),
+        _extends({}, props, { role: 'presentation', className: (0, _classNames['default'])(props.className, classes) }),
         _React['default'].createElement(
           'a',
-          linkProps,
+          _extends({}, linkProps, { 'aria-selected': active, 'aria-controls': ariaControls }),
           children
         )
       );
@@ -86,3 +96,4 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
   module.exports = NavItem;
 });
+// eslint-disable-line react/prop-types

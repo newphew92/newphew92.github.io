@@ -1,4 +1,4 @@
-define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './Button', './ButtonGroup', './ButtonInput', './ButtonToolbar', './CollapsibleNav', './Carousel', './CarouselItem', './Col', './DropdownButton', './DropdownMenu', './Glyphicon', './Grid', './Input', './Interpolate', './Jumbotron', './Label', './ListGroup', './ListGroupItem', './MenuItem', './Modal', './Nav', './Navbar', './NavItem', './ModalTrigger', './OverlayTrigger', './PageHeader', './Panel', './PanelGroup', './PageItem', './Pager', './Pagination', './Popover', './ProgressBar', './Row', './SplitButton', './SubNav', './TabbedArea', './Table', './TabPane', './Thumbnail', './Tooltip', './Well'], function (exports, module, _Accordion, _Affix, _Alert, _Badge, _Button, _ButtonGroup, _ButtonInput, _ButtonToolbar, _CollapsibleNav, _Carousel, _CarouselItem, _Col, _DropdownButton, _DropdownMenu, _Glyphicon, _Grid, _Input, _Interpolate, _Jumbotron, _Label, _ListGroup, _ListGroupItem, _MenuItem, _Modal, _Nav, _Navbar, _NavItem, _ModalTrigger, _OverlayTrigger, _PageHeader, _Panel, _PanelGroup, _PageItem, _Pager, _Pagination, _Popover, _ProgressBar, _Row, _SplitButton, _SubNav, _TabbedArea, _Table, _TabPane, _Thumbnail, _Tooltip, _Well) {
+define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './Button', './ButtonGroup', './ButtonInput', './ButtonToolbar', './CollapsibleNav', './Carousel', './CarouselItem', './Col', './DropdownButton', './DropdownMenu', './Glyphicon', './Grid', './Input', './Interpolate', './Jumbotron', './Label', './ListGroup', './ListGroupItem', './MenuItem', './Modal', './ModalHeader', './ModalTitle', './ModalBody', './ModalFooter', './Nav', './Navbar', './NavItem', './ModalTrigger', './Overlay', './OverlayTrigger', './PageHeader', './Panel', './PanelGroup', './PageItem', './Pager', './Pagination', './Popover', './Portal', './Position', './ProgressBar', './Row', './SplitButton', './SubNav', './TabbedArea', './Table', './TabPane', './Thumbnail', './Tooltip', './Well'], function (exports, module, _Accordion, _Affix, _Alert, _Badge, _Button, _ButtonGroup, _ButtonInput, _ButtonToolbar, _CollapsibleNav, _Carousel, _CarouselItem, _Col, _DropdownButton, _DropdownMenu, _Glyphicon, _Grid, _Input, _Interpolate, _Jumbotron, _Label, _ListGroup, _ListGroupItem, _MenuItem, _Modal, _ModalHeader, _ModalTitle, _ModalBody, _ModalFooter, _Nav, _Navbar, _NavItem, _ModalTrigger, _Overlay, _OverlayTrigger, _PageHeader, _Panel, _PanelGroup, _PageItem, _Pager, _Pagination, _Popover, _Portal, _Position, _ProgressBar, _Row, _SplitButton, _SubNav, _TabbedArea, _Table, _TabPane, _Thumbnail, _Tooltip, _Well) {
   'use strict';
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -51,6 +51,14 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
 
   var _Modal2 = _interopRequireDefault(_Modal);
 
+  var _ModalHeader2 = _interopRequireDefault(_ModalHeader);
+
+  var _ModalTitle2 = _interopRequireDefault(_ModalTitle);
+
+  var _ModalBody2 = _interopRequireDefault(_ModalBody);
+
+  var _ModalFooter2 = _interopRequireDefault(_ModalFooter);
+
   var _Nav2 = _interopRequireDefault(_Nav);
 
   var _Navbar2 = _interopRequireDefault(_Navbar);
@@ -58,6 +66,8 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
   var _NavItem2 = _interopRequireDefault(_NavItem);
 
   var _ModalTrigger2 = _interopRequireDefault(_ModalTrigger);
+
+  var _Overlay2 = _interopRequireDefault(_Overlay);
 
   var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 
@@ -74,6 +84,10 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
   var _Pagination2 = _interopRequireDefault(_Pagination);
 
   var _Popover2 = _interopRequireDefault(_Popover);
+
+  var _Portal2 = _interopRequireDefault(_Portal);
+
+  var _Position2 = _interopRequireDefault(_Position);
 
   var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
 
@@ -145,6 +159,14 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
 
     Modal: _Modal2['default'],
 
+    ModalHeader: _ModalHeader2['default'],
+
+    ModalTitle: _ModalTitle2['default'],
+
+    ModalBody: _ModalBody2['default'],
+
+    ModalFooter: _ModalFooter2['default'],
+
     Nav: _Nav2['default'],
 
     Navbar: _Navbar2['default'],
@@ -152,6 +174,8 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
     NavItem: _NavItem2['default'],
 
     ModalTrigger: _ModalTrigger2['default'],
+
+    Overlay: _Overlay2['default'],
 
     OverlayTrigger: _OverlayTrigger2['default'],
 
@@ -168,6 +192,10 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
     Pagination: _Pagination2['default'],
 
     Popover: _Popover2['default'],
+
+    Portal: _Portal2['default'],
+
+    Position: _Position2['default'],
 
     ProgressBar: _ProgressBar2['default'],
 
@@ -187,5 +215,7 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
 
     Tooltip: _Tooltip2['default'],
 
-    Well: _Well2['default'] };
+    Well: _Well2['default']
+
+  };
 });

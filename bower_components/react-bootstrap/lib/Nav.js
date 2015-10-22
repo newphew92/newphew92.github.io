@@ -19,6 +19,9 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
 
   var _createChainedFunction = _interopRequireDefault(_utilsCreateChainedFunction);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Nav = _React['default'].createClass({
     displayName: 'Nav',
 
@@ -50,9 +53,9 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
     },
 
     getCollapsibleDimensionValue: function getCollapsibleDimensionValue() {
-      var node = _React['default'].findDOMNode(this.refs.ul),
-          height = node.offsetHeight,
-          computedStyles = _domUtils['default'].getComputedStyles(node);
+      var node = _React['default'].findDOMNode(this.refs.ul);
+      var height = node.offsetHeight;
+      var computedStyles = _domUtils['default'].getComputedStyles(node);
 
       return height + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
     },
@@ -82,7 +85,11 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
 
       return _React['default'].createElement(
         'ul',
-        _extends({}, this.props, { className: (0, _classNames['default'])(this.props.className, classes), ref: 'ul' }),
+        _extends({}, this.props, {
+          role: this.props.bsStyle === 'tabs' ? 'tablist' : null,
+          className: (0, _classNames['default'])(this.props.className, classes),
+          ref: 'ul'
+        }),
         _ValidComponentChildren['default'].map(this.props.children, this.renderNavItem)
       );
     },
@@ -107,6 +114,7 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
 
     renderNavItem: function renderNavItem(child, index) {
       return (0, _react.cloneElement)(child, {
+        role: this.props.bsStyle === 'tabs' ? 'tab' : null,
         active: this.getChildActiveProp(child),
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,

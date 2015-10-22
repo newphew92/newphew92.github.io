@@ -13,6 +13,9 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './utils
 
   var _CustomPropTypes = _interopRequireDefault(_utilsCustomPropTypes);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var ButtonGroup = _React['default'].createClass({
     displayName: 'ButtonGroup',
 
@@ -21,6 +24,10 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './utils
     propTypes: {
       vertical: _React['default'].PropTypes.bool,
       justified: _React['default'].PropTypes.bool,
+      /**
+       * Display block buttons, only useful when used with the "vertical" prop.
+       * @type {bool}
+       */
       block: _CustomPropTypes['default'].all([_React['default'].PropTypes.bool, function (props, propName, componentName) {
         if (props.block && !props.vertical) {
           return new Error('The block property requires the vertical property to be set to have any effect');

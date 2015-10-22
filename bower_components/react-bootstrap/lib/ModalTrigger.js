@@ -1,23 +1,48 @@
-define(['exports', 'module', 'react', './OverlayMixin', './utils/createChainedFunction', './utils/createContextWrapper'], function (exports, module, _react, _OverlayMixin, _utilsCreateChainedFunction, _utilsCreateContextWrapper) {
+define(['exports', 'module', 'react', './utils/CustomPropTypes', './utils/deprecationWarning', './utils/createChainedFunction', './utils/createContextWrapper', './OverlayMixin'], function (exports, module, _react, _utilsCustomPropTypes, _utilsDeprecationWarning, _utilsCreateChainedFunction, _utilsCreateContextWrapper, _OverlayMixin) {
   'use strict';
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _React = _interopRequireDefault(_react);
 
-  var _OverlayMixin2 = _interopRequireDefault(_OverlayMixin);
+  var _CustomPropTypes = _interopRequireDefault(_utilsCustomPropTypes);
+
+  var _deprecationWarning = _interopRequireDefault(_utilsDeprecationWarning);
 
   var _createChainedFunction = _interopRequireDefault(_utilsCreateChainedFunction);
 
   var _createContextWrapper = _interopRequireDefault(_utilsCreateContextWrapper);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
+  function createHideDepreciationWrapper(hide) {
+    return function () {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      (0, _deprecationWarning['default'])('The Modal prop `onRequestHide`', 'the `onHide` prop');
+
+      return hide.apply(undefined, args);
+    };
+  }
+
   var ModalTrigger = _React['default'].createClass({
     displayName: 'ModalTrigger',
 
-    mixins: [_OverlayMixin2['default']],
+    mixins: [_OverlayMixin.OverlayMixin],
 
     propTypes: {
-      modal: _React['default'].PropTypes.node.isRequired
+      modal: _React['default'].PropTypes.node.isRequired,
+      /**
+       * The DOM Node that the Component will render it's children into
+       */
+      container: _CustomPropTypes['default'].mountable,
+      onBlur: _React['default'].PropTypes.func,
+      onFocus: _React['default'].PropTypes.func,
+      onMouseOut: _React['default'].PropTypes.func,
+      onMouseOver: _React['default'].PropTypes.func
     },
 
     getInitialState: function getInitialState() {
@@ -45,12 +70,16 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/createChainedFu
     },
 
     renderOverlay: function renderOverlay() {
+      var modal = this.props.modal;
+
       if (!this.state.isOverlayShown) {
         return _React['default'].createElement('span', null);
       }
 
-      return (0, _react.cloneElement)(this.props.modal, {
-        onRequestHide: this.hide
+      return (0, _react.cloneElement)(modal, {
+        onHide: this.hide,
+        onRequestHide: createHideDepreciationWrapper(this.hide),
+        __isUsedInModalTrigger: true
       });
     },
 
@@ -84,5 +113,20 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/createChainedFu
    */
   ModalTrigger.withContext = (0, _createContextWrapper['default'])(ModalTrigger, 'modal');
 
-  module.exports = ModalTrigger;
+  var DepreciatedModalTrigger = _React['default'].createClass({
+    displayName: 'DepreciatedModalTrigger',
+
+    componentWillMount: function componentWillMount() {
+      (0, _deprecationWarning['default'])('The `ModalTrigger` component', 'the `Modal` component directly', 'http://react-bootstrap.github.io/components.html#modals');
+    },
+
+    render: function render() {
+      return _React['default'].createElement(ModalTrigger, this.props);
+    }
+  });
+
+  DepreciatedModalTrigger.withContext = ModalTrigger.withContext;
+  DepreciatedModalTrigger.ModalTrigger = ModalTrigger;
+
+  module.exports = DepreciatedModalTrigger;
 });

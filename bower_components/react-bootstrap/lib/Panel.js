@@ -13,6 +13,9 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './Colla
 
   var _CollapsibleMixin2 = _interopRequireDefault(_CollapsibleMixin);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Panel = _React['default'].createClass({
     displayName: 'Panel',
 
@@ -185,6 +188,7 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './Colla
         'a',
         {
           href: '#' + (this.props.id || ''),
+          'aria-controls': this.props.collapsible ? this.props.id : null,
           className: this.isExpanded() ? null : 'collapsed',
           'aria-expanded': this.isExpanded() ? 'true' : 'false',
           onClick: this.handleSelect },

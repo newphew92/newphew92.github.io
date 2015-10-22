@@ -21,6 +21,9 @@ define(['exports', 'module', 'react', './InputBase', './ButtonInput', './FormCon
 
   var _deprecationWarning = _interopRequireDefault(_utilsDeprecationWarning);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Input = (function (_InputBase) {
     function Input() {
       _classCallCheck(this, Input);

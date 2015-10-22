@@ -7,6 +7,9 @@ define(['exports', 'module', 'react', './utils/domUtils'], function (exports, mo
 
   var _domUtils = _interopRequireDefault(_utilsDomUtils);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   // TODO: listen for onTransitionEnd to remove el
   function getElementsAndSelf(root, classes) {
     var els = root.querySelectorAll('.' + classes.join('.'));
@@ -65,8 +68,8 @@ define(['exports', 'module', 'react', './utils/domUtils'], function (exports, mo
     },
 
     componentWillUnmount: function componentWillUnmount() {
-      var els = getElementsAndSelf(_React['default'].findDOMNode(this), ['fade']),
-          container = this.props.container && _React['default'].findDOMNode(this.props.container) || _domUtils['default'].ownerDocument(this).body;
+      var els = getElementsAndSelf(_React['default'].findDOMNode(this), ['fade']);
+      var container = this.props.container && _React['default'].findDOMNode(this.props.container) || _domUtils['default'].ownerDocument(this).body;
 
       if (els.length) {
         this._fadeOutEl = document.createElement('div');

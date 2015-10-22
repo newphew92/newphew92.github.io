@@ -23,6 +23,9 @@ define(['exports', 'module', 'react', './Button', './FormGroup', './InputBase', 
 
   var _childrenValueValidation = _interopRequireDefault(_utilsChildrenValueInputValidation);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var ButtonInput = (function (_InputBase) {
     function ButtonInput() {
       _classCallCheck(this, ButtonInput);
@@ -43,7 +46,6 @@ define(['exports', 'module', 'react', './Button', './FormGroup', './InputBase', 
 
         var other = _objectWithoutProperties(_props, ['bsStyle', 'value']);
 
-        // eslint-disable-line object-shorthand
         return _React['default'].createElement(
           _FormGroup2['default'],
           other,
@@ -59,7 +61,6 @@ define(['exports', 'module', 'react', './Button', './FormGroup', './InputBase', 
 
         var other = _objectWithoutProperties(_props2, ['children', 'value']);
 
-        // eslint-disable-line object-shorthand
         var val = children ? children : value;
         return _React['default'].createElement(_Button2['default'], _extends({}, other, { componentClass: 'input', ref: 'input', key: 'input', value: val }));
       }

@@ -1,11 +1,12 @@
 define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './utils/ValidComponentChildren'], function (exports, module, _react, _classnames, _BootstrapMixin, _utilsValidComponentChildren) {
-  /* eslint react/prop-types: [1, {ignore: ["children", "className", "bsStyle"]}]*/
-  /* BootstrapMixin contains `bsStyle` type validation */
   'use strict';
 
   var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
+  /* BootstrapMixin contains `bsStyle` type validation */
 
   var _React = _interopRequireDefault(_react);
 
@@ -15,6 +16,9 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './utils
 
   var _ValidComponentChildren = _interopRequireDefault(_utilsValidComponentChildren);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var PanelGroup = _React['default'].createClass({
     displayName: 'PanelGroup',
 
@@ -23,6 +27,8 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin', './utils
     propTypes: {
       accordion: _React['default'].PropTypes.bool,
       activeKey: _React['default'].PropTypes.any,
+      className: _React['default'].PropTypes.string,
+      children: _React['default'].PropTypes.node,
       defaultActiveKey: _React['default'].PropTypes.any,
       onSelect: _React['default'].PropTypes.func
     },

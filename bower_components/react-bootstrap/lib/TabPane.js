@@ -11,6 +11,9 @@ define(['exports', 'module', 'react', 'classnames', './utils/TransitionEvents'],
 
   var _TransitionEvents = _interopRequireDefault(_utilsTransitionEvents);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var TabPane = _React['default'].createClass({
     displayName: 'TabPane',
 
@@ -87,7 +90,11 @@ define(['exports', 'module', 'react', 'classnames', './utils/TransitionEvents'],
 
       return _React['default'].createElement(
         'div',
-        _extends({}, this.props, { className: (0, _classNames['default'])(this.props.className, classes) }),
+        _extends({}, this.props, {
+          role: 'tabpanel',
+          'aria-hidden': !this.props.active,
+          className: (0, _classNames['default'])(this.props.className, classes)
+        }),
         this.props.children
       );
     }

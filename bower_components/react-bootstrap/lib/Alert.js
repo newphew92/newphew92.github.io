@@ -11,6 +11,9 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
   var _BootstrapMixin2 = _interopRequireDefault(_BootstrapMixin);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Alert = _React['default'].createClass({
     displayName: 'Alert',
 
@@ -18,13 +21,15 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
     propTypes: {
       onDismiss: _React['default'].PropTypes.func,
-      dismissAfter: _React['default'].PropTypes.number
+      dismissAfter: _React['default'].PropTypes.number,
+      closeLabel: _React['default'].PropTypes.string
     },
 
     getDefaultProps: function getDefaultProps() {
       return {
         bsClass: 'alert',
-        bsStyle: 'info'
+        bsStyle: 'info',
+        closeLabel: 'Close Alert'
       };
     },
 
@@ -34,9 +39,13 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
         {
           type: 'button',
           className: 'close',
-          onClick: this.props.onDismiss,
-          'aria-hidden': 'true' },
-        '×'
+          'aria-label': this.props.closeLabel,
+          onClick: this.props.onDismiss },
+        _React['default'].createElement(
+          'span',
+          { 'aria-hidden': 'true' },
+          '×'
+        )
       );
     },
 
@@ -48,7 +57,7 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
       return _React['default'].createElement(
         'div',
-        _extends({}, this.props, { className: (0, _classNames['default'])(this.props.className, classes) }),
+        _extends({}, this.props, { role: 'alert', className: (0, _classNames['default'])(this.props.className, classes) }),
         isDismissable ? this.renderDismissButton() : null,
         this.props.children
       );

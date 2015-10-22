@@ -1,4 +1,4 @@
-define(['exports', 'module', 'react', './BootstrapMixin', 'classnames', './utils/ValidComponentChildren', './utils/createChainedFunction'], function (exports, module, _react, _BootstrapMixin, _classnames, _utilsValidComponentChildren, _utilsCreateChainedFunction) {
+define(['exports', 'module', 'react', './BootstrapMixin', 'classnames', './utils/ValidComponentChildren', './utils/createChainedFunction', './utils/CustomPropTypes'], function (exports, module, _react, _BootstrapMixin, _classnames, _utilsValidComponentChildren, _utilsCreateChainedFunction, _utilsCustomPropTypes) {
   'use strict';
 
   var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15,6 +15,11 @@ define(['exports', 'module', 'react', './BootstrapMixin', 'classnames', './utils
 
   var _createChainedFunction = _interopRequireDefault(_utilsCreateChainedFunction);
 
+  var _CustomPropTypes = _interopRequireDefault(_utilsCustomPropTypes);
+
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Navbar = _React['default'].createClass({
     displayName: 'Navbar',
 
@@ -27,7 +32,7 @@ define(['exports', 'module', 'react', './BootstrapMixin', 'classnames', './utils
       inverse: _React['default'].PropTypes.bool,
       fluid: _React['default'].PropTypes.bool,
       role: _React['default'].PropTypes.string,
-      componentClass: _React['default'].PropTypes.node.isRequired,
+      componentClass: _CustomPropTypes['default'].elementType,
       brand: _React['default'].PropTypes.node,
       toggleButton: _React['default'].PropTypes.node,
       toggleNavKey: _React['default'].PropTypes.oneOfType([_React['default'].PropTypes.string, _React['default'].PropTypes.number]),

@@ -15,6 +15,9 @@ define(['exports', 'module', 'react', 'classnames', './utils/ValidComponentChild
 
   var _BootstrapMixin2 = _interopRequireDefault(_BootstrapMixin);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var SubNav = _React['default'].createClass({
     displayName: 'SubNav',
 
@@ -54,8 +57,6 @@ define(['exports', 'module', 'react', 'classnames', './utils/ValidComponentChild
     },
 
     isChildActive: function isChildActive(child) {
-      var _this = this;
-
       if (child.props.active) {
         return true;
       }
@@ -69,21 +70,15 @@ define(['exports', 'module', 'react', 'classnames', './utils/ValidComponentChild
       }
 
       if (child.props.children) {
-        var _ret = (function () {
-          var isActive = false;
+        var isActive = false;
 
-          _ValidComponentChildren['default'].forEach(child.props.children, function (grandchild) {
-            if (this.isChildActive(grandchild)) {
-              isActive = true;
-            }
-          }, _this);
+        _ValidComponentChildren['default'].forEach(child.props.children, function (grandchild) {
+          if (this.isChildActive(grandchild)) {
+            isActive = true;
+          }
+        }, this);
 
-          return {
-            v: isActive
-          };
-        })();
-
-        if (typeof _ret === 'object') return _ret.v;
+        return isActive;
       }
 
       return false;

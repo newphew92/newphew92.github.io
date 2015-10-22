@@ -5,6 +5,9 @@ define(['exports', 'module', 'react', 'classnames', './utils/createChainedFuncti
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  /* eslint react/prop-types: [2, {ignore: "bsSize"}] */
+  /* BootstrapMixin contains `bsSize` type validation */
+
   var _React = _interopRequireDefault(_react);
 
   var _classNames = _interopRequireDefault(_classnames);
@@ -23,6 +26,9 @@ define(['exports', 'module', 'react', 'classnames', './utils/createChainedFuncti
 
   var _ValidComponentChildren = _interopRequireDefault(_utilsValidComponentChildren);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var DropdownButton = _React['default'].createClass({
     displayName: 'DropdownButton',
 
@@ -33,11 +39,14 @@ define(['exports', 'module', 'react', 'classnames', './utils/createChainedFuncti
       dropup: _React['default'].PropTypes.bool,
       title: _React['default'].PropTypes.node,
       href: _React['default'].PropTypes.string,
+      id: _React['default'].PropTypes.string,
       onClick: _React['default'].PropTypes.func,
       onSelect: _React['default'].PropTypes.func,
       navItem: _React['default'].PropTypes.bool,
       noCaret: _React['default'].PropTypes.bool,
-      buttonClassName: _React['default'].PropTypes.string
+      buttonClassName: _React['default'].PropTypes.string,
+      className: _React['default'].PropTypes.string,
+      children: _React['default'].PropTypes.node
     },
 
     render: function render() {

@@ -11,10 +11,19 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
 
   var _BootstrapMixin2 = _interopRequireDefault(_BootstrapMixin);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var Thumbnail = _React['default'].createClass({
     displayName: 'Thumbnail',
 
     mixins: [_BootstrapMixin2['default']],
+
+    propTypes: {
+      alt: _React['default'].PropTypes.string,
+      href: _React['default'].PropTypes.string,
+      src: _React['default'].PropTypes.string
+    },
 
     getDefaultProps: function getDefaultProps() {
       return {

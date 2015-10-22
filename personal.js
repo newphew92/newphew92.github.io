@@ -1,3 +1,5 @@
+var SOURCES = [["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"], ["facebook", "www.facebook,com"]]
+
 var Date = React.createClass({
 	render: function() {
 		return (
@@ -19,7 +21,7 @@ var Personal = React.createClass({
 			this.setState(state)
 			}.bind(this);
 	},
-	organizeGroups:function(list){
+	organizeGroups: function(list){
 		var b = [];var c = [];
 		for (var i = 1; i<= list.length;i++){
 			b=b.concat(list[i-1])
@@ -30,7 +32,7 @@ var Personal = React.createClass({
 		}
 		return c;
 	},
-	organize : function (len) {
+	organize: function (len) {
 		var B = ReactBootstrap;
 		var Row = B.Row,
 			Col = B.Col;
@@ -84,6 +86,30 @@ var Personal = React.createClass({
 			</div>	
 			)
 	},
+	panelTitle: function (title){
+		var B = ReactBootstrap;
+		var Row = B.Row,
+			Col = B.Col;
+		return(
+			<Row>
+					<Col lg = {12} md = {12} xs = {12}>
+							<h1>{title}</h1>
+					</Col>
+				</Row>	
+		)	
+	},
+	listify: function (list){
+		var ListGroupItem = ReactBootstrap.ListGroupItem;
+		var ListGroup = ReactBootstrap.ListGroup;
+		return(
+			<ListGroup fill>
+				{list.map(function (el){
+					return <ListGroupItem><a href = {el[1]}>{el[0]}</a></ListGroupItem>
+				}
+			)}
+			</ListGroup>
+			)
+	},
 	render: function(){
 		var B = ReactBootstrap;
 		var Row = B.Row,
@@ -94,7 +120,8 @@ var Personal = React.createClass({
 			MenuItem = B.MenuItem,
 			Panel = B.Panel,
 			NavItem = B.NavItem;
-		
+			ListGroup = B.ListGroup;
+			ListGroupItem = B.ListGroupItem;
 		var screen = {
 			profile : (
 				<Panel style = {{margin:"0%"}}>
@@ -139,54 +166,73 @@ var Personal = React.createClass({
 			),
 			main : (
 				<Panel>
-				<Row>
-					<Col lg = {12} md = {12} xs = {12}>
-							<h1>Terrence Ko</h1>
-					</Col>
-				</Row>	
-				<Row>
-					<Col lg = {4} lgOffset = {1} md = {4} mdOffset = {1} xs = {12}>
-						<div id = "portrait"><img src = "https://raw.githubusercontent.com/newphew92/newphew92.github.io/master/Pictures/smallBinocular.JPG" class ="img-responsive"></img></div>
-					</Col>
-					<Col lg = {6} md = {6} xs = {12}>
-						<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>		
-						<p>I will occasionally write some things that I find interesting such as travel blogs, cooking recipes and funny things in general.</p>
-						<p>I originally intended this page to be powered by Node.js and have a login feature (for the gigges) but since I can't be bothered to set up a server, I'll stick to using static pages only.</p>
-						<p>This website is hosted on Github and the repo is public. I'm using React.js for the front-end along with React-Bootstrap spinkled with JQuery.</p>
-					</Col>
-				</Row>
-				<br/>
-				<Row>
-					<Col lg = {12} md = {12} xs = {12}>
-						<p>I personally believe that it is important that programmers should all be able to make a simple web page and what better way is there to practice than having your very own personal web page?
-						Websites are good for going from theory to practical quickly and increase your exposure to the world.</p>
-						<p>You may think that the navbar leads to other webpages but wait! This is only one single webpage and I'm counting on react to make speedy transitions.
-						This might be annoying if you feel the need to refresh this page often so I'll try to come up with a fix.</p>
-						<p>UPDATE: Haha! Success! Just merely had to manually set the the url, do a little componentDidMount and regex, read the end and set state! Refresh away without loading a new page!</p>
-					</Col>
-				</Row>
-			</Panel>	
+					{this.panelTitle("Terrence Ko")}
+					<Row>
+						<Col lg = {4} lgOffset = {1} md = {4} mdOffset = {1} xs = {12}>
+							<div id = "portrait"><img src = "https://raw.githubusercontent.com/newphew92/newphew92.github.io/master/Pictures/smallBinocular.JPG" class ="img-responsive"></img></div>
+						</Col>
+						<Col lg = {6} md = {6} xs = {12}>
+							<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>		
+							<p>I will occasionally write some things that I find interesting such as travel blogs, cooking recipes and funny things in general.</p>
+							<p>I originally intended this page to be powered by Node.js and have a login feature (for the gigges) but since I can't be bothered to set up a server, I'll stick to using static pages only.</p>
+							<p>This website is hosted on Github and the repo is public. I'm using React.js for the front-end along with React-Bootstrap spinkled with JQuery.</p>
+						</Col>
+					</Row>
+					<br/>
+					<Row>
+						<Col lg = {12} md = {12} xs = {12}>
+							<p>I personally believe that it is important that programmers should all be able to make a simple web page and what better way is there to practice than having your very own personal web page?
+							Websites are good for going from theory to practical quickly and increase your exposure to the world.</p>
+							<p>You may think that the navbar leads to other webpages but wait! This is only one single webpage and I'm counting on react to make speedy transitions.
+							This might be annoying if you feel the need to refresh this page often so I'll try to come up with a fix.</p>
+							<p>UPDATE: Haha! Success! Just merely had to manually set the the url, do a little componentDidMount and regex, read the end and set state! Refresh away without loading a new page!</p>
+						</Col>
+					</Row>
+				</Panel>	
 			),
 			moebius: (
 				<Panel>
-					<Row><Col lg = {12} md = {12} xs = {12}><h1>Dave's Moebius Strip</h1></Col></Row>
-						<Row  style = {{textAlign:"center"}}>
-							<Col centered lg = {12} md = {12} xs = {12}>
-									<object id = "moebius" type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
-							</Col>
-						</Row>
-						<br/>
-							<Row style = {{textAlign:"center"}}><Col lg = {12} md = {12} xs = {12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
+					{this.panelTitle("Dave's Moebius strip")}
+					<Row  style = {{textAlign:"center"}}>
+						<Col centered lg = {12} md = {12} xs = {12}>
+								<object id = "moebius" type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
+						</Col>
+					</Row>
+					<br/>
+					<Row style = {{textAlign:"center"}}><Col lg = {12} md = {12} xs = {12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
 				</Panel> 
 			),
 			ants:(
 				<Panel>
-					<Row><Col lg = {12} md = {12} xs = {12}><h1>Ants</h1></Col></Row>
+					{this.panelTitle("Ants")}
 					<Row><Col style = {{textAlign : "center"}} lg = {12} md = {12} xs = {12}><iframe width="560" height="315" src="https://www.youtube.com/embed/hn0DmTNHlEc" frameborder="0" allowfullscreen></iframe></Col></Row>
 					<Row><Col lg = {12} md = {12} xs = {12}><p>I've recently watched a video of ants at war with each other and it reminded me very much of how I keep getting routed by Colossi+storms or mass battlecruisers+tanks in Starcraft 2.
 					I've decided to add one ant per loss in this manner to this page and remove an ant when I win in these situations. I hope the page doesnt' get infested.</p></Col></Row>
 					{this.organize (3)}
 				</Panel>	
+			),
+			niceBagel:(
+				<Panel>
+					{this.panelTitle("Nice Bagel")}
+					<Row>
+						<Col lg = {12} md = {12} xs = {12}>
+							For the Software Development class, my teammates Chuong and Philippe and I are developping a game called Permusion. The goal is rather straightforward: you and other players must enter a maze and exit it. But in our diabolical Shymalanism, we added a few twists! First off, there are periodic blackouts in the maze and when the lights come back on, you'll find that the maze will be QUITE different. And just for kicks, zombies are lurking around so be careful.
+							Fear not though, for there are many items scattered around the maze that you can pick up and craft into useful tools such as flashlights, potions and armour. Further, there will be hats! 
+						</Col>
+					</Row>
+					<br/>
+					<Row style = {{textAlign:"center"}}>
+						<Col lg = {12} md = {12} xs = {12}>
+							Check back here to see which ressources we'll be using and our development progress.
+						</Col>
+					</Row>
+					<Row>
+						<Panel collapsible defaultExpanded header="Ressources" style = {{margin: "5%", paddingBottom: "20px"}}>
+							{this.listify(SOURCES)}
+					  </Panel>
+					</Row>
+					<Row></Row>
+				</Panel>
 			),
 		}	
 		
@@ -200,8 +246,14 @@ var Personal = React.createClass({
 		        <MenuItem divider />
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
+		      <DropdownButton eventKey={4} title='Cooking recipes'>
+		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
+		        <MenuItem divider />
+		        <MenuItem eventKey='3' >Something else here</MenuItem>
+		      </DropdownButton>
 		      <NavItem eventKey={3} href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</NavItem>
 		      <NavItem eventKey={4} href = "http://us.battle.net/sc2/en/profile/2145980/1/newphew/">Starcraft</NavItem>
+		    	<NavItem eventKey={5} href = "#niceBagel" onClick = {this.handleScreen.bind(null,'niceBagel')}>Nice Bagel</NavItem>
 		      <NavItem eventKey={1} href = "#graveyard" onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>

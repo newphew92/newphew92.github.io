@@ -1,21 +1,28 @@
-define(['exports', 'module', 'react', './OverlayMixin', './RootCloseWrapper', './utils/createChainedFunction', './utils/createContextWrapper', './utils/domUtils'], function (exports, module, _react, _OverlayMixin, _RootCloseWrapper, _utilsCreateChainedFunction, _utilsCreateContextWrapper, _utilsDomUtils) {
+define(['exports', 'module', 'react', './utils/createChainedFunction', './utils/createContextWrapper', './Overlay', './utils/overlayPositionUtils', './utils/deprecationWarning', 'react/lib/warning'], function (exports, module, _react, _utilsCreateChainedFunction, _utilsCreateContextWrapper, _Overlay, _utilsOverlayPositionUtils, _utilsDeprecationWarning, _reactLibWarning) {
   'use strict';
 
   var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  /*eslint-disable react/prop-types */
+
   var _React = _interopRequireDefault(_react);
-
-  var _OverlayMixin2 = _interopRequireDefault(_OverlayMixin);
-
-  var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
 
   var _createChainedFunction = _interopRequireDefault(_utilsCreateChainedFunction);
 
   var _createContextWrapper = _interopRequireDefault(_utilsCreateContextWrapper);
 
-  var _domUtils = _interopRequireDefault(_utilsDomUtils);
+  var _Overlay2 = _interopRequireDefault(_Overlay);
+
+  var _position = _interopRequireDefault(_utilsOverlayPositionUtils);
+
+  var _deprecationWarning = _interopRequireDefault(_utilsDeprecationWarning);
+
+  var _warning = _interopRequireDefault(_reactLibWarning);
+
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
 
   /**
    * Check if value one is inside or equal to the of value
@@ -34,43 +41,88 @@ define(['exports', 'module', 'react', './OverlayMixin', './RootCloseWrapper', '.
   var OverlayTrigger = _React['default'].createClass({
     displayName: 'OverlayTrigger',
 
-    mixins: [_OverlayMixin2['default']],
+    propTypes: _extends({}, _Overlay2['default'].propTypes, {
 
-    propTypes: {
+      /**
+      * Specify which action or actions trigger Overlay visibility
+      */
       trigger: _React['default'].PropTypes.oneOfType([_React['default'].PropTypes.oneOf(['manual', 'click', 'hover', 'focus']), _React['default'].PropTypes.arrayOf(_React['default'].PropTypes.oneOf(['click', 'hover', 'focus']))]),
-      placement: _React['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+      /**
+       * A millisecond delay amount to show and hide the Overlay once triggered
+       */
       delay: _React['default'].PropTypes.number,
+      /**
+       * A millisecond delay amount before showing the Overlay once triggered.
+       */
       delayShow: _React['default'].PropTypes.number,
+      /**
+       * A millisecond delay amount before hiding the Overlay once triggered.
+       */
       delayHide: _React['default'].PropTypes.number,
+
+      /**
+       * The initial visibility state of the Overlay, for more nuanced visibility controll consider
+       * using the Overlay component directly.
+       */
       defaultOverlayShown: _React['default'].PropTypes.bool,
+
+      /**
+       * An element or text to overlay next to the target.
+       */
       overlay: _React['default'].PropTypes.node.isRequired,
-      containerPadding: _React['default'].PropTypes.number,
-      rootClose: _React['default'].PropTypes.bool
-    },
+
+      /**
+       * @private
+       */
+      onBlur: _React['default'].PropTypes.func,
+      /**
+       * @private
+       */
+      onClick: _React['default'].PropTypes.func,
+      /**
+       * @private
+       */
+      onFocus: _React['default'].PropTypes.func,
+      /**
+       * @private
+       */
+      onMouseEnter: _React['default'].PropTypes.func,
+      /**
+       * @private
+       */
+      onMouseLeave: _React['default'].PropTypes.func,
+
+      //override specific overlay props
+      /**
+       * @private
+       */
+      target: function target() {},
+      /**
+      * @private
+      */
+      onHide: function onHide() {},
+      /**
+       * @private
+       */
+      show: function show() {}
+    }),
 
     getDefaultProps: function getDefaultProps() {
       return {
-        placement: 'right',
-        trigger: ['hover', 'focus'],
-        containerPadding: 0
+        trigger: ['hover', 'focus']
       };
     },
 
     getInitialState: function getInitialState() {
       return {
-        isOverlayShown: this.props.defaultOverlayShown == null ? false : this.props.defaultOverlayShown,
-        overlayLeft: null,
-        overlayTop: null,
-        arrowOffsetLeft: null,
-        arrowOffsetTop: null
+        isOverlayShown: this.props.defaultOverlayShown == null ? false : this.props.defaultOverlayShown
       };
     },
 
     show: function show() {
       this.setState({
         isOverlayShown: true
-      }, function () {
-        this.updateOverlayPosition();
       });
     },
 
@@ -88,68 +140,87 @@ define(['exports', 'module', 'react', './OverlayMixin', './RootCloseWrapper', '.
       }
     },
 
-    renderOverlay: function renderOverlay() {
-      if (!this.state.isOverlayShown) {
-        return _React['default'].createElement('span', null);
-      }
-
-      var overlay = (0, _react.cloneElement)(this.props.overlay, {
-        onRequestHide: this.hide,
-        placement: this.props.placement,
-        positionLeft: this.state.overlayLeft,
-        positionTop: this.state.overlayTop,
-        arrowOffsetLeft: this.state.arrowOffsetLeft,
-        arrowOffsetTop: this.state.arrowOffsetTop
-      });
-
-      if (this.props.rootClose) {
-        return _React['default'].createElement(
-          _RootCloseWrapper2['default'],
-          { onRootClose: this.hide },
-          overlay
-        );
-      } else {
-        return overlay;
-      }
-    },
-
-    render: function render() {
-      var child = _React['default'].Children.only(this.props.children);
-      if (this.props.trigger === 'manual') {
-        return child;
-      }
-
-      var props = {};
-
-      props.onClick = (0, _createChainedFunction['default'])(child.props.onClick, this.props.onClick);
-      if (isOneOf('click', this.props.trigger)) {
-        props.onClick = (0, _createChainedFunction['default'])(this.toggle, props.onClick);
-      }
-
-      if (isOneOf('hover', this.props.trigger)) {
-        props.onMouseOver = (0, _createChainedFunction['default'])(this.handleDelayedShow, this.props.onMouseOver);
-        props.onMouseOut = (0, _createChainedFunction['default'])(this.handleDelayedHide, this.props.onMouseOut);
-      }
-
-      if (isOneOf('focus', this.props.trigger)) {
-        props.onFocus = (0, _createChainedFunction['default'])(this.handleDelayedShow, this.props.onFocus);
-        props.onBlur = (0, _createChainedFunction['default'])(this.handleDelayedHide, this.props.onBlur);
-      }
-
-      return (0, _react.cloneElement)(child, props);
+    componentDidMount: function componentDidMount() {
+      this._mountNode = document.createElement('div');
+      _React['default'].render(this._overlay, this._mountNode);
     },
 
     componentWillUnmount: function componentWillUnmount() {
+      _React['default'].unmountComponentAtNode(this._mountNode);
+      this._mountNode = null;
       clearTimeout(this._hoverDelay);
     },
 
-    componentDidMount: function componentDidMount() {
-      if (this.props.defaultOverlayShown) {
-        this.updateOverlayPosition();
+    componentDidUpdate: function componentDidUpdate() {
+      _React['default'].render(this._overlay, this._mountNode);
+    },
+
+    getOverlay: function getOverlay() {
+      var _this = this;
+
+      var props = {
+        show: this.state.isOverlayShown,
+        onHide: this.hide,
+        rootClose: this.props.rootClose,
+        target: function target() {
+          return _React['default'].findDOMNode(_this);
+        },
+        placement: this.props.placement,
+        container: this.props.container,
+        containerPadding: this.props.containerPadding
+      };
+
+      var overlay = (0, _react.cloneElement)(this.props.overlay, {
+        placement: props.placement,
+        container: props.container
+      });
+
+      return _React['default'].createElement(
+        _Overlay2['default'],
+        props,
+        overlay
+      );
+    },
+
+    render: function render() {
+      var trigger = _React['default'].Children.only(this.props.children);
+
+      var props = {
+        'aria-describedby': this.props.overlay.props.id
+      };
+
+      // create in render otherwise owner is lost...
+      this._overlay = this.getOverlay();
+
+      if (this.props.trigger !== 'manual') {
+
+        props.onClick = (0, _createChainedFunction['default'])(trigger.props.onClick, this.props.onClick);
+
+        if (isOneOf('click', this.props.trigger)) {
+          props.onClick = (0, _createChainedFunction['default'])(this.toggle, props.onClick);
+        }
+
+        if (isOneOf('hover', this.props.trigger)) {
+          (0, _warning['default'])(!(this.props.trigger === 'hover'), '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' + 'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
+
+          props.onMouseOver = (0, _createChainedFunction['default'])(this.handleDelayedShow, this.props.onMouseOver);
+          props.onMouseOut = (0, _createChainedFunction['default'])(this.handleDelayedHide, this.props.onMouseOut);
+        }
+
+        if (isOneOf('focus', this.props.trigger)) {
+          props.onFocus = (0, _createChainedFunction['default'])(this.handleDelayedShow, this.props.onFocus);
+          props.onBlur = (0, _createChainedFunction['default'])(this.handleDelayedHide, this.props.onBlur);
+        }
+      } else {
+        (0, _deprecationWarning['default'])('"manual" trigger type', ' the Overlay component');
       }
+
+      return (0, _react.cloneElement)(trigger, props);
     },
 
     handleDelayedShow: function handleDelayedShow() {
+      var _this2 = this;
+
       if (this._hoverDelay != null) {
         clearTimeout(this._hoverDelay);
         this._hoverDelay = null;
@@ -163,13 +234,15 @@ define(['exports', 'module', 'react', './OverlayMixin', './RootCloseWrapper', '.
         return;
       }
 
-      this._hoverDelay = setTimeout((function () {
-        this._hoverDelay = null;
-        this.show();
-      }).bind(this), delay);
+      this._hoverDelay = setTimeout(function () {
+        _this2._hoverDelay = null;
+        _this2.show();
+      }, delay);
     },
 
     handleDelayedHide: function handleDelayedHide() {
+      var _this3 = this;
+
       if (this._hoverDelay != null) {
         clearTimeout(this._hoverDelay);
         this._hoverDelay = null;
@@ -183,131 +256,29 @@ define(['exports', 'module', 'react', './OverlayMixin', './RootCloseWrapper', '.
         return;
       }
 
-      this._hoverDelay = setTimeout((function () {
-        this._hoverDelay = null;
-        this.hide();
-      }).bind(this), delay);
+      this._hoverDelay = setTimeout(function () {
+        _this3._hoverDelay = null;
+        _this3.hide();
+      }, delay);
     },
 
-    updateOverlayPosition: function updateOverlayPosition() {
-      if (!this.isMounted()) {
-        return;
-      }
-
-      this.setState(this.calcOverlayPosition());
-    },
-
+    // deprecated Methods
     calcOverlayPosition: function calcOverlayPosition() {
-      var childOffset = this.getPosition();
+      var overlay = this.props.overlay;
 
-      var overlayNode = this.getOverlayDOMNode();
-      var overlayHeight = overlayNode.offsetHeight;
-      var overlayWidth = overlayNode.offsetWidth;
+      (0, _deprecationWarning['default'])('OverlayTrigger.calcOverlayPosition()', 'utils/overlayPositionUtils');
 
-      var placement = this.props.placement;
-      var overlayLeft = undefined,
-          overlayTop = undefined,
-          arrowOffsetLeft = undefined,
-          arrowOffsetTop = undefined;
-
-      if (placement === 'left' || placement === 'right') {
-        overlayTop = childOffset.top + (childOffset.height - overlayHeight) / 2;
-
-        if (placement === 'left') {
-          overlayLeft = childOffset.left - overlayWidth;
-        } else {
-          overlayLeft = childOffset.left + childOffset.width;
-        }
-
-        var topDelta = this._getTopDelta(overlayTop, overlayHeight);
-        overlayTop += topDelta;
-        arrowOffsetTop = 50 * (1 - 2 * topDelta / overlayHeight) + '%';
-        arrowOffsetLeft = null;
-      } else if (placement === 'top' || placement === 'bottom') {
-        overlayLeft = childOffset.left + (childOffset.width - overlayWidth) / 2;
-
-        if (placement === 'top') {
-          overlayTop = childOffset.top - overlayHeight;
-        } else {
-          overlayTop = childOffset.top + childOffset.height;
-        }
-
-        var leftDelta = this._getLeftDelta(overlayLeft, overlayWidth);
-        overlayLeft += leftDelta;
-        arrowOffsetLeft = 50 * (1 - 2 * leftDelta / overlayWidth) + '%';
-        arrowOffsetTop = null;
-      } else {
-        throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
-      }
-
-      return { overlayLeft: overlayLeft, overlayTop: overlayTop, arrowOffsetLeft: arrowOffsetLeft, arrowOffsetTop: arrowOffsetTop };
-    },
-
-    _getTopDelta: function _getTopDelta(top, overlayHeight) {
-      var containerDimensions = this._getContainerDimensions();
-      var containerScroll = containerDimensions.scroll;
-      var containerHeight = containerDimensions.height;
-
-      var padding = this.props.containerPadding;
-      var topEdgeOffset = top - padding - containerScroll;
-      var bottomEdgeOffset = top + padding - containerScroll + overlayHeight;
-
-      if (topEdgeOffset < 0) {
-        return -topEdgeOffset;
-      } else if (bottomEdgeOffset > containerHeight) {
-        return containerHeight - bottomEdgeOffset;
-      } else {
-        return 0;
-      }
-    },
-
-    _getLeftDelta: function _getLeftDelta(left, overlayWidth) {
-      var containerDimensions = this._getContainerDimensions();
-      var containerWidth = containerDimensions.width;
-
-      var padding = this.props.containerPadding;
-      var leftEdgeOffset = left - padding;
-      var rightEdgeOffset = left + padding + overlayWidth;
-
-      if (leftEdgeOffset < 0) {
-        return -leftEdgeOffset;
-      } else if (rightEdgeOffset > containerWidth) {
-        return containerWidth - rightEdgeOffset;
-      } else {
-        return 0;
-      }
-    },
-
-    _getContainerDimensions: function _getContainerDimensions() {
-      var containerNode = this.getContainerDOMNode();
-      var width = undefined,
-          height = undefined,
-          scroll = undefined;
-
-      if (containerNode.tagName === 'BODY') {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        scroll = _domUtils['default'].ownerDocument(containerNode).documentElement.scrollTop || containerNode.scrollTop;
-      } else {
-        width = containerNode.offsetWidth;
-        height = containerNode.offsetHeight;
-        scroll = containerNode.scrollTop;
-      }
-
-      return { width: width, height: height, scroll: scroll };
+      return _position['default'].calcOverlayPosition(overlay.props.placement || this.props.placement, _React['default'].findDOMNode(overlay), _React['default'].findDOMNode(this), _React['default'].findDOMNode(overlay.props.container || this.props.container), overlay.props.containerPadding || this.props.containerPadding);
     },
 
     getPosition: function getPosition() {
-      var node = _React['default'].findDOMNode(this);
-      var container = this.getContainerDOMNode();
+      (0, _deprecationWarning['default'])('OverlayTrigger.getPosition()', 'utils/overlayPositionUtils');
 
-      var offset = container.tagName === 'BODY' ? _domUtils['default'].getOffset(node) : _domUtils['default'].getPosition(node, container);
+      var overlay = this.props.overlay;
 
-      return _extends({}, offset, { // eslint-disable-line object-shorthand
-        height: node.offsetHeight,
-        width: node.offsetWidth
-      });
+      return _position['default'].getPosition(_React['default'].findDOMNode(this), _React['default'].findDOMNode(overlay.props.container || this.props.container));
     }
+
   });
 
   /**

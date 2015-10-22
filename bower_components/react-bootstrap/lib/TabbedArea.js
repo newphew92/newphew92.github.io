@@ -5,6 +5,8 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
   var _React = _interopRequireDefault(_react);
 
   var _BootstrapMixin2 = _interopRequireDefault(_BootstrapMixin);
@@ -14,6 +16,16 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
   var _Nav2 = _interopRequireDefault(_Nav);
 
   var _NavItem2 = _interopRequireDefault(_NavItem);
+
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
+  var panelId = function panelId(props, child) {
+    return child.props.id ? child.props.id : props.id && props.id + '___panel___' + child.props.eventKey;
+  };
+  var tabId = function tabId(props, child) {
+    return child.props.id ? child.props.id + '___tab' : props.id && props.id + '___tab___' + child.props.eventKey;
+  };
 
   function getDefaultActiveKeyFromChildren(children) {
     var defaultActiveKey = undefined;
@@ -72,6 +84,11 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
     },
 
     render: function render() {
+      var _props = this.props;
+      var id = _props.id;
+
+      var props = _objectWithoutProperties(_props, ['id']);
+
       var activeKey = this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
       function renderTabIfSet(child) {
@@ -80,7 +97,7 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
 
       var nav = _React['default'].createElement(
         _Nav2['default'],
-        _extends({}, this.props, { activeKey: activeKey, onSelect: this.handleSelect, ref: 'tabs' }),
+        _extends({}, props, { activeKey: activeKey, onSelect: this.handleSelect, ref: 'tabs' }),
         _ValidComponentChildren['default'].map(this.props.children, renderTabIfSet, this)
       );
 
@@ -90,7 +107,7 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
         nav,
         _React['default'].createElement(
           'div',
-          { id: this.props.id, className: 'tab-content', ref: 'panes' },
+          { id: id, className: 'tab-content', ref: 'panes' },
           _ValidComponentChildren['default'].map(this.props.children, this.renderPane)
         )
       );
@@ -103,8 +120,12 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
     renderPane: function renderPane(child, index) {
       var activeKey = this.getActiveKey();
 
+      var active = child.props.eventKey === activeKey && (this.state.previousActiveKey == null || !this.props.animation);
+
       return (0, _react.cloneElement)(child, {
-        active: child.props.eventKey === activeKey && (this.state.previousActiveKey == null || !this.props.animation),
+        active: active,
+        id: panelId(this.props, child),
+        'aria-labelledby': tabId(this.props, child),
         key: child.key ? child.key : index,
         animation: this.props.animation,
         onAnimateOutEnd: this.state.previousActiveKey != null && child.props.eventKey === this.state.previousActiveKey ? this.handlePaneAnimateOutEnd : null
@@ -121,7 +142,9 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
       return _React['default'].createElement(
         _NavItem2['default'],
         {
+          linkId: tabId(this.props, child),
           ref: 'tab' + eventKey,
+          'aria-controls': panelId(this.props, child),
           eventKey: eventKey,
           className: className,
           disabled: disabled },

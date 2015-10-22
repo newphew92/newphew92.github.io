@@ -17,6 +17,9 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
 
   var _createChainedFunction = _interopRequireDefault(_utilsCreateChainedFunction);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var CollapsibleNav = _React['default'].createClass({
     displayName: 'CollapsibleNav',
 
@@ -41,9 +44,9 @@ define(['exports', 'module', 'react', './BootstrapMixin', './CollapsibleMixin', 
       for (var key in nodes) {
         if (nodes.hasOwnProperty(key)) {
 
-          var n = _React['default'].findDOMNode(nodes[key]),
-              h = n.offsetHeight,
-              computedStyles = _domUtils['default'].getComputedStyles(n);
+          var n = _React['default'].findDOMNode(nodes[key]);
+          var h = n.offsetHeight;
+          var computedStyles = _domUtils['default'].getComputedStyles(n);
 
           height += h + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
         }

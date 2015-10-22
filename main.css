@@ -199,6 +199,9 @@ div#portrait{
         text-align: center; font-family: "PT Sans", sans-serif; font-weight:700;
         text-transform: uppercase; padding: 0.09em 0px 0px 0px;
       }
+.panel-heading {
+	padding-bottom: 20px;
+}      
 .section-block { margin: 0px 0px 1.5em 2em; display: block; float: left; width: 33em; }
 .section-block p { border-bottom: 1px #bcd dotted; }
 div .year {

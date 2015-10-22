@@ -17,6 +17,9 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
 
   var _React = _interopRequireDefault(_react);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   /**
    * Creates new trigger class that injects context into overlay.
    */
@@ -45,11 +48,9 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
             // Strip injected props from below.
             var _props = this.props;
             var wrapped = _props.wrapped;
+            var context = _props.context;
 
-            var props = _objectWithoutProperties(_props, ['wrapped']);
-
-            // eslint-disable-line object-shorthand
-            delete props.context;
+            var props = _objectWithoutProperties(_props, ['wrapped', 'context']);
 
             return _React['default'].cloneElement(wrapped, props);
           }

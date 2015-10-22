@@ -7,10 +7,25 @@ define(['exports', 'module', './styleMaps', './utils/CustomPropTypes'], function
 
   var _CustomPropTypes = _interopRequireDefault(_utilsCustomPropTypes);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
   var BootstrapMixin = {
     propTypes: {
+      /**
+       * bootstrap className
+       * @private
+       */
       bsClass: _CustomPropTypes['default'].keyOf(_styleMaps2['default'].CLASSES),
+      /**
+       * Style variants
+       * @type {("default"|"primary"|"success"|"info"|"warning"|"danger"|"link")}
+       */
       bsStyle: _CustomPropTypes['default'].keyOf(_styleMaps2['default'].STYLES),
+      /**
+       * Size variants
+       * @type {("xsmall"|"small"|"medium"|"large")}
+       */
       bsSize: _CustomPropTypes['default'].keyOf(_styleMaps2['default'].SIZES)
     },
 

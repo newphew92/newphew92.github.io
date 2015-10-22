@@ -5,6 +5,11 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
 
   var _React = _interopRequireDefault(_react);
 
+  console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
+  console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
+
+  var canUseDom = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
   /**
    * Get elements owner document
    *
@@ -14,6 +19,25 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
   function ownerDocument(componentOrElement) {
     var elem = _React['default'].findDOMNode(componentOrElement);
     return elem && elem.ownerDocument || document;
+  }
+
+  function ownerWindow(componentOrElement) {
+    var doc = ownerDocument(componentOrElement);
+    return doc.defaultView ? doc.defaultView : doc.parentWindow;
+  }
+
+  /**
+   * get the active element, safe in IE
+   * @return {HTMLElement}
+   */
+  function getActiveElement(componentOrElement) {
+    var doc = ownerDocument(componentOrElement);
+
+    try {
+      return doc.activeElement || doc.body;
+    } catch (e) {
+      return doc.body;
+    }
   }
 
   /**
@@ -64,12 +88,25 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
    * @returns {{top: number, left: number}}
    */
   function getPosition(elem, offsetParent) {
+    var offset = undefined,
+        parentOffset = undefined;
+
     if (window.jQuery) {
-      return window.jQuery(elem).position();
+      if (!offsetParent) {
+        return window.jQuery(elem).position();
+      }
+
+      offset = window.jQuery(elem).offset();
+      parentOffset = window.jQuery(offsetParent).offset();
+
+      // Get element offset relative to offsetParent
+      return {
+        top: offset.top - parentOffset.top,
+        left: offset.left - parentOffset.left
+      };
     }
 
-    var offset = undefined,
-        parentOffset = { top: 0, left: 0 };
+    parentOffset = { top: 0, left: 0 };
 
     // Fixed elements are offset from window (parentOffset = {top:0, left: 0}, because it is its only offset parent
     if (getComputedStyles(elem).position === 'fixed') {
@@ -116,11 +153,35 @@ define(['exports', 'module', 'react'], function (exports, module, _react) {
     return offsetParent || docElem;
   }
 
+  /**
+   * Cross browser .contains() polyfill
+   * @param  {HTMLElement} elem
+   * @param  {HTMLElement} inner
+   * @return {bool}
+   */
+  function contains(elem, inner) {
+    function ie8Contains(root, node) {
+      while (node) {
+        if (node === root) {
+          return true;
+        }
+        node = node.parentNode;
+      }
+      return false;
+    }
+
+    return elem && elem.contains ? elem.contains(inner) : elem && elem.compareDocumentPosition ? elem === inner || !!(elem.compareDocumentPosition(inner) & 16) : ie8Contains(elem, inner);
+  }
+
   module.exports = {
+    canUseDom: canUseDom,
+    contains: contains,
+    ownerWindow: ownerWindow,
     ownerDocument: ownerDocument,
     getComputedStyles: getComputedStyles,
     getOffset: getOffset,
     getPosition: getPosition,
+    activeElement: getActiveElement,
     offsetParent: offsetParentFunc
   };
 });
