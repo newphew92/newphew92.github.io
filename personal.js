@@ -1,4 +1,6 @@
-var SOURCES = [["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"], ["facebook", "www.facebook,com"]]
+var SOURCES = [
+	["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"],
+	["C++ Tutorial", "http://www.cplusplus.com/"]]
 
 var Date = React.createClass({
 	render: function() {
@@ -122,6 +124,7 @@ var Personal = React.createClass({
 			NavItem = B.NavItem;
 			ListGroup = B.ListGroup;
 			ListGroupItem = B.ListGroupItem;
+			PanelGroup = B.PanelGroup;
 		var screen = {
 			profile : (
 				<Panel style = {{margin:"0%"}}>
@@ -226,12 +229,17 @@ var Personal = React.createClass({
 							Check back here to see which ressources we'll be using and our development progress.
 						</Col>
 					</Row>
-					<Row>
-						<Panel collapsible defaultExpanded header="Ressources" style = {{margin: "5%", paddingBottom: "20px"}}>
+						<Panel collapsible defaultExpanded header="Resources" >
 							{this.listify(SOURCES)}
 					  </Panel>
-					</Row>
-					<Row></Row>
+					<Row>
+						<Col lg = {12} md = {12} xs = {12}>
+							<h2>Development Timeline</h2>
+						</Col>
+					</Row>	
+						<Panel collapsible header="Planning Phase">
+							Writing the report and stuff, really not very fun be have to do it. Hopefully we'll move on to something more interesting.
+					  </Panel>
 				</Panel>
 			),
 		}	
@@ -247,9 +255,6 @@ var Personal = React.createClass({
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
 		      <DropdownButton eventKey={4} title='Cooking recipes'>
-		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
-		        <MenuItem divider />
-		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
 		      <NavItem eventKey={3} href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</NavItem>
 		      <NavItem eventKey={4} href = "http://us.battle.net/sc2/en/profile/2145980/1/newphew/">Starcraft</NavItem>
