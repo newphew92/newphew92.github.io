@@ -204,6 +204,16 @@ div#portrait{
 }      
 .section-block { margin: 0px 0px 1.5em 2em; display: block; float: left; width: 33em; }
 .section-block p { border-bottom: 1px #bcd dotted; }
+
+nav.navbar.navbar-default.navbar-fixed-top{
+	background-color: #F29924
+}
+.navbar-default .navbar-brand{
+	color: black;
+}
+.navbar-default .navbar-nav > li > a{
+	color:  black;
+}
 div .year {
 	float:right;
 	font-family:italic,bold;
