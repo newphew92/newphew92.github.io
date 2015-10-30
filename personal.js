@@ -1,6 +1,7 @@
 var SOURCES = [
 	["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"],
-	["C++ Tutorial", "http://www.cplusplus.com/"]]
+	["C++ Tutorial", "http://www.cplusplus.com/"],
+	["Unreal Engine","https://www.unrealengine.com/blog"]]
 
 var Date = React.createClass({
 	render: function() {
@@ -270,4 +271,4 @@ var Personal = React.createClass({
 
 });
 
-React.render(<Personal></Personal>, document.getElementById('content'));
+React.DOMrender(<Personal></Personal>, document.getElementById('content'));
