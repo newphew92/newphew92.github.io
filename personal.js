@@ -271,4 +271,4 @@ var Personal = React.createClass({
 
 });
 
-React.DOMrender(<Personal></Personal>, document.getElementById('content'));
+ReactDOM.render(<Personal></Personal>, document.getElementById('content'));
