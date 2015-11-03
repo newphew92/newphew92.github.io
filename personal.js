@@ -199,7 +199,7 @@ var Personal = React.createClass({
 					{this.panelTitle("Dave's Moebius strip")}
 					<Row  style = {{textAlign:"center"}}>
 						<Col centered lg = {12} md = {12} xs = {12}>
-								<object id = "moebius" type = "image/svg+xml" data = "Pictures/Moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
+								<object id = "moebius" type = "image/svg+xml" data = "Pictures/moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
 						</Col>
 					</Row>
 					<br/>
