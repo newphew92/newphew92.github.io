@@ -218,3 +218,47 @@ div .year {
 	float:right;
 	font-family:italic,bold;
 }
+#starcraft-card{
+	padding: 10px 10px;
+}
+.background-video { display: none; }
+@media only screen and (min-width: 1024px) {
+    .background-video { display: block; margin:auto;}
+}
+/* chracter card */
+.character-card { top: 148px; right: 14px; background: url(http://us.battle.net/sc2/static/images/layout/cards/bg-profile.png) 0 0 no-repeat; margin:auto; }
+.character-card:hover { background-position: 0 -74px;}
+.character-card,
+.character-card a.click-area { display: block; width: 297px; height: 74px; }
+
+.character-card a.click-area .inner { display: block; padding: 14px 100px 0 24px; font-weight: normal; font-size: 13px; }
+.character-card a.click-area .inner strong { color:#00509A; }
+.character-card a.login { color: #6EA6CA; background-position:0 0 }
+
+.character-card .avatar-frame { right: 2px; top: 2px; float:right;/* background: url('http://media.blizzard.com/sc2/portraits/5-90.jpg') 0px 0px no-repeat; width: 70px; height: 70px;*/}
+.character-card .avatar-frame span {float:right;}
+.character-card .avatar-frame,
+.character-card .avatar-frame .border { display: block; width: 70px; height: 70px; }
+.character-card .avatar-frame .avatar,
+.character-card .avatar-frame .no-avatar { display: block; width: 70px; height: 70px; background: url(http://us.battle.net/sc2/static/images/layout/cards/login-avatar.png) center center no-repeat; }
+
+.character-card .avatar-frame .icon { display: none;}
+
+.character-card .player-name { display: block; color: #7CB2D7; font-size: 13px; }
+.character-card .player-name .empty { display: block; padding-top: 10px; }
+.cjk .character-card .player-name { font-weight:normal }
+
+.character-card .guild-name { display:block; color:#333; width: 200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.character-card .guild-name:hover { color: #000 }
+
+.character-card .message { padding: 0px 4px 0 24px; }
+.character-card .click-area:hover .character-name { color: #000000; }
+
+.character-card .character .character-name { font-size: 24px; font-weight: normal; text-shadow: #FFF 0 0 3px; color: #00509A; padding-right: 20px; background: url("http://us.battle.net/sc2/static/images/icons/arrows.gif") 100% 4px no-repeat; line-height: 26px; overflow: hidden; text-overflow: ellipsis; max-width: 140px; display: inline-block; white-space: nowrap; }
+.character-card .character .character-name:hover { color: #005EFF; }
+.character-card .character .character-name.name-small { font-size: 16px; }
+.ko-kr .character-card .character .character-name { font-family: DaumRegular; font-size: 16px; }
+.character-card .character .achievement-score { background: url("http://us.battle.net/sc2/static/images/icons/achievement.png") 1px -114px no-repeat; padding: 1px 0 1px 16px; display: block; }
+.ie6 .character-card .character .achievement-score { background: url("http://us.battle.net/sc2/static/images/icons/achievement.gif") 1px -114px no-repeat; }
+
+.character-card .character .ui-context { top: 60px; left: 40px; }

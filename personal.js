@@ -1,16 +1,16 @@
-var SOURCES = [
+var SOURCES=[
 	["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"],
 	["C++ Tutorial", "http://www.cplusplus.com/"],
 	["Unreal Engine","https://www.unrealengine.com/blog"]]
-
-var Date = React.createClass({
+// newphew 490 nickbot 977
+var Date=React.createClass({
 	render: function() {
 		return (
-			<div style = {{float:"right",fontFamily:"italic bold", fontStyle:"italic bold"}}>{this.props.date}</div>
+			<div style={{float:"right",fontFamily:"italic bold", fontStyle:"italic bold"}}>{this.props.date}</div>
 		)
 	}
 });
-var Personal = React.createClass({
+var Personal=React.createClass({
 	getInitialState: function(){
 		return {
 			screen: "main",
@@ -19,41 +19,41 @@ var Personal = React.createClass({
 	handleChange: function(stateName) {
 		return function (event) {
 			console.log(event.target.value);
-			var state = {};
-			state[stateName] = event.target ? event.target.value : event;
+			var state={};
+			state[stateName]=event.target ? event.target.value : event;
 			this.setState(state)
 			}.bind(this);
 	},
-	organizeGroups: function(list){
-		var b = [];var c = [];
-		for (var i = 1; i<= list.length;i++){
+	organizeGroups: function(list, rowLength){
+		var b=[];var c=[];
+		for (var i=1; i<= list.length;i++){
 			b=b.concat(list[i-1])
-			if(i%10 === 0||i === list.length){
-				c = c.concat([b]);  
-				b = [];
+			if(i%rowLength === 0||i === list.length){
+				c=c.concat([b]);  
+				b=[];
 			}
 		}
 		return c;
 	},
 	organize: function (len) {
-		var B = ReactBootstrap;
-		var Row = B.Row,
-			Col = B.Col;
-		var ants = <img src = "Pictures/ant.svg.thumb.png" class ="img-responsive"></img>;
-		var rows = len % 12 + 1;
-		var antlist = [];
-		for (var i = 0; i< len;i++){
+		var B=ReactBootstrap;
+		var Row=B.Row,
+			Col=B.Col;
+		var ants=<img src="Pictures/ant.svg.thumb.png" className ="img-responsive"></img>;
+		var rows=len % 12 + 1;
+		var antlist=[];
+		for (var i=0; i< len;i++){
 			antlist.push(ants);
 		}
-		var newAnts = this.organizeGroups(antlist);
+		var newAnts=this.organizeGroups(antlist,10);
 		return (
 			<div>
-				<Row><Col lg = {12} md = {12} xs = {12}><h2>There are {len} Ants</h2></Col></Row>
+				<Row><Col lg={12} md={12} xs={12}><h2>There are {len} Ants</h2></Col></Row>
 				{newAnts.map(
-					function (el) {
-						return <Row>{el.map(
-							function (e) {
-								return <Col xs = {1} md = {1} lg = {1}>{e}
+					function (el, i) {
+						return <Row key={i}>{el.map(
+							function (e, i) {
+								return <Col key={i} xs={1} md={1} lg={1}>{e}
 								</Col>
 							}
 						)}</Row>
@@ -65,72 +65,72 @@ var Personal = React.createClass({
 	},
 	handleScreen: function(stateName) {
 			this.setState({screen:stateName})
-			// location.hash = '#'+content;
+			// location.hash='#'+content;
 	},
 	componentDidMount: function() {
-		var url = window.location.href.split("/")
+		var url=window.location.href.split("/")
 		console.log(url)
-		var path = (url [url.length-1]).replace(/[#]/,"")
-		if (! path){path = "main"}
+		var path=(url [url.length-1]).replace(/[#]/,"")
+		if (! path){path="main"}
 		this.setState({screen:path})
 		// console.log(/.+?(?=\#)/.exec(url))
 		console.log(path)
 		// this.setState({})
 	},
 	cvRow: function(title, date, content) {
-		var B = ReactBootstrap;
-		var Row = B.Row,
-			Col = B.Col;
+		var B=ReactBootstrap;
+		var Row=B.Row,
+			Col=B.Col;
 
 		return(
 			<div>	
-				<Row><Col lg = {12}><h4>{title}</h4><Date date={date}/></Col></Row>
-				<Row><Col lg = {12}><p>{content}</p></Col></Row>
+				<Row><Col lg={12}><h4>{title}</h4><Date date={date}/></Col></Row>
+				<Row><Col lg={12}><p>{content}</p></Col></Row>
 			</div>	
 			)
 	},
 	panelTitle: function (title){
-		var B = ReactBootstrap;
-		var Row = B.Row,
-			Col = B.Col;
+		var B=ReactBootstrap;
+		var Row=B.Row,
+			Col=B.Col;
 		return(
 			<Row>
-					<Col lg = {12} md = {12} xs = {12}>
+					<Col lg={12} md={12} xs={12}>
 							<h1>{title}</h1>
 					</Col>
 				</Row>	
 		)	
 	},
 	listify: function (list){
-		var ListGroupItem = ReactBootstrap.ListGroupItem;
-		var ListGroup = ReactBootstrap.ListGroup;
+		var ListGroupItem=ReactBootstrap.ListGroupItem;
+		var ListGroup=ReactBootstrap.ListGroup;
 		return(
 			<ListGroup fill>
-				{list.map(function (el){
-					return <ListGroupItem><a href = {el[1]}>{el[0]}</a></ListGroupItem>
+				{list.map(function (el, i){
+					return <ListGroupItem key={i}><a href={el[1]}>{el[0]}</a></ListGroupItem>
 				}
 			)}
 			</ListGroup>
 			)
 	},
 	render: function(){
-		var B = ReactBootstrap;
-		var Row = B.Row,
-			Col = B.Col,
-			Navbar = B.Navbar,
-			Nav = B.Nav,
-			DropdownButton = B.DropdownButton,
-			MenuItem = B.MenuItem,
-			Panel = B.Panel,
-			NavItem = B.NavItem;
-			ListGroup = B.ListGroup;
-			ListGroupItem = B.ListGroupItem;
-			PanelGroup = B.PanelGroup;
-		var screen = {
+		var B=ReactBootstrap;
+		var Row=B.Row,
+			Col=B.Col,
+			Navbar=B.Navbar,
+			Nav=B.Nav,
+			DropdownButton=B.DropdownButton,
+			MenuItem=B.MenuItem,
+			Panel=B.Panel,
+			NavItem=B.NavItem;
+			ListGroup=B.ListGroup;
+			ListGroupItem=B.ListGroupItem;
+			PanelGroup=B.PanelGroup;
+		var screen={
 			profile : (
-				<Panel style = {{margin:"0%"}}>
+				<Panel style={{margin:"0%"}}>
 					<Row>
-						<Col lg = {10} lgOffset = {1}>
+						<Col lg={10} lgOffset={1}>
 							<p>I was born in Montreal, Canada in 1992. Growing up, I learned how to play the piano and participated in many competitions until I entered CEGEP (pre-university institution in Quebec, the equivalent of the last year of high school and first year of university). 
 							Interested in medical technologies and particularily artificial organs, I enrolled into the program of Anatomy and Cell Biology at Mcgill University. 
 							After a year and a half, I took up programming and felt that I was learning much more. 
@@ -138,33 +138,33 @@ var Personal = React.createClass({
 							<p>I am currently finishing my Bachelor of Science and will graduate in 2016.</p>
 						</Col>
 					</Row>
-					<Row><Col lg = {12}><h2>Curriculum Vitae (Abridged)</h2></Col></Row>
+					<Row><Col lg={12}><h2>Curriculum Vitae (Abridged)</h2></Col></Row>
 					<Row>
-						<Col lg = {5} lgOffset = {1} xs = {12}><h3>Education</h3></Col>
-						<Col lg = {5}>
+						<Col lg={5} lgOffset={1} xs={12}><h3>Education</h3></Col>
+						<Col lg={5}>
 							{this.cvRow("Mcgill University","2012-2016","Bachelor of Science: Liberal Degree (Core Anatomy and Cell Biology and Computer Science)")}
 							{this.cvRow("College Jean-de-Brebeuf (CEGEP)","2010-2012","DEC in Health Sciences")}
 							{this.cvRow("College Jean-de-Brebeuf (Secondary)","2004-2010","Highschool Diploma")}
 						</Col>
-						<Col lg = {1}></Col>
+						<Col lg={1}></Col>
 					</Row>
-					<Row><Col lg = {8} lgOffset = {1}><hr/></Col></Row>
-					<Row><Col lg = {5} lgOffset = {1} xs = {12}><h3>Work Experience</h3></Col>
-						<Col lg = {5}>
+					<Row><Col lg={8} lgOffset={1}><hr/></Col></Row>
+					<Row><Col lg={5} lgOffset={1} xs={12}><h3>Work Experience</h3></Col>
+						<Col lg={5}>
 							{this.cvRow("Sushi Shop","Summer 2012","Sous-chef")}
 							{this.cvRow("Heart of the City Piano Program","2012-2013","Piano Teacher")}
 						</Col>
-						<Col lg = {1}></Col>
+						<Col lg={1}></Col>
 					</Row>
-					<Row><Col lg = {8} lgOffset = {1}><hr/></Col></Row>
+					<Row><Col lg={8} lgOffset={1}><hr/></Col></Row>
 					<Row>
-				     <Col lg = {5} lgOffset = {1} xs = {12}><h3>Competitions and Awards</h3></Col>
-				     <Col lg = {5}>
+				     <Col lg={5} lgOffset={1} xs={12}><h3>Competitions and Awards</h3></Col>
+				     <Col lg={5}>
 				      {this.cvRow("McHacks","Summer 2015","My team and I attempted to create an app that would take advantage of modern cellphone cameras and scan a deck of cards being rifled through. Such information would be used to cheat in card games.")}
 				      {this.cvRow("Mcgill CodeJam:Artificial Intelligience (final round finish)","2014","The goal of this competition was to come up with a facial recognition algorithm that would identify black and white pictures of people without the aid of packages related to facial recognition.")}
 					    {this.cvRow("Mcgill Dobson Cup Entrepreneurial Start-up competition (second round finish)","2014","The Dobson cup aims to provide funding to the winning startup")}
 				   	</Col>
-				   	<Col lg = {1}></Col>
+				   	<Col lg={1}></Col>
 				  </Row>
 				   </Panel> 
 			),
@@ -172,10 +172,10 @@ var Personal = React.createClass({
 				<Panel>
 					{this.panelTitle("Terrence Ko")}
 					<Row>
-						<Col lg = {4} lgOffset = {1} md = {4} mdOffset = {1} xs = {12}>
-							<div id = "portrait"><img src = "https://raw.githubusercontent.com/newphew92/newphew92.github.io/master/Pictures/smallBinocular.JPG" class ="img-responsive"></img></div>
+						<Col lg={4} lgOffset={1} md={4} mdOffset={1} xs={12}>
+							<div id="portrait"><img src="https://raw.githubusercontent.com/newphew92/newphew92.github.io/master/Pictures/smallBinocular.JPG" className ="img-responsive"></img></div>
 						</Col>
-						<Col lg = {6} md = {6} xs = {12}>
+						<Col lg={6} md={6} xs={12}>
 							<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>		
 							<p>I will occasionally write some things that I find interesting such as travel blogs, cooking recipes and funny things in general.</p>
 							<p>I originally intended this page to be powered by Node.js and have a login feature (for the gigges) but since I can't be bothered to set up a server, I'll stick to using static pages only.</p>
@@ -184,7 +184,7 @@ var Personal = React.createClass({
 					</Row>
 					<br/>
 					<Row>
-						<Col lg = {12} md = {12} xs = {12}>
+						<Col lg={12} md={12} xs={12}>
 							<p>I personally believe that it is important that programmers should all be able to make a simple web page and what better way is there to practice than having your very own personal web page?
 							Websites are good for going from theory to practical quickly and increase your exposure to the world.</p>
 							<p>You may think that the navbar leads to other webpages but wait! This is only one single webpage and I'm counting on react to make speedy transitions.
@@ -194,23 +194,78 @@ var Personal = React.createClass({
 					</Row>
 				</Panel>	
 			),
+			starcraft: (
+				<Panel>
+					<Row>
+						<Col centered lg={12} md={12} xs={12}>
+							<video className="background-video logo-video" autoPlay="autoplay" loop="loop" poster="http://us.battle.net/sc2/static/videos/logo.jpg">
+								<source xmlns="http://www.w3.org/1999/xhtml" src="http://media.blizzard.com/sc2/home/logo.webm" type="video/webm" />
+							</video>
+						</Col>
+					</Row>
+					<Row >	
+						<Col id="starcraft-card" 	centered lg={12} md={12} xs={12}>
+							<div className="character-card card-game-char ajax-update">
+								<div className="message">
+									<span className="avatar-frame">
+										<img src="http://media.blizzard.com/sc2/portraits/5-0.jpg" className="avatar avatar-sc2" />
+									</span>
+									<span className="player-name">
+										Terry
+									</span>
+									<span className="border"></span>
+									<div className="character">
+										<a className="character-name context-link serif " href="http://us.battle.net/sc2/en/profile/2145980/1/newphew/" rel="np">
+											newphew 
+										</a>
+									</div>	
+									<span className="achievement-score">Character Code: 490</span>
+									<span className="icon icon-sc2"></span>
+								</div>
+							</div>	
+						</Col>	
+					</Row>
+					<Row >
+						<Col id="starcraft-card" 	centered lg={12} md={12} xs={12}>
+							<div className="character-card card-game-char ajax-update">
+								<div className="message">
+									<span className="avatar-frame">
+										<img src="http://media.blizzard.com/sc2/portraits/3-31.jpg" className="avatar avatar-sc2" />
+									</span>
+									<span className="player-name">
+										Nicolas
+									</span>
+									<span className="border"></span>
+									<div className="character">
+										<a className="character-name context-link serif " href="http://us.battle.net/sc2/en/profile/657826/1/nickbot/" rel="np">
+											nickbot 
+										</a>
+									</div>	
+									<span className="achievement-score">Character Code: 977</span>
+									<span className="icon icon-sc2"></span>
+								</div>
+							</div>	
+						</Col>
+					</Row>
+				</Panel>
+			),
 			moebius: (
 				<Panel>
 					{this.panelTitle("Dave's Moebius strip")}
-					<Row  style = {{textAlign:"center"}}>
-						<Col centered lg = {12} md = {12} xs = {12}>
-								<object id = "moebius" type = "image/svg+xml" data = "Pictures/moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
+					<Row  style={{textAlign:"center"}}>
+						<Col centered lg={12} md={12} xs={12}>
+								<object id="moebius" type="image/svg+xml" data="Pictures/moebius.svg"> Your brower sucks, stop being a plebe and get a browser with HTML5</object>
 						</Col>
 					</Row>
 					<br/>
-					<Row style = {{textAlign:"center"}}><Col lg = {12} md = {12} xs = {12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
+					<Row style={{textAlign:"center"}}><Col lg={12} md={12} xs={12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
 				</Panel> 
 			),
 			ants:(
 				<Panel>
 					{this.panelTitle("Ants")}
-					<Row><Col style = {{textAlign : "center"}} lg = {12} md = {12} xs = {12}><iframe width="560" height="315" src="https://www.youtube.com/embed/hn0DmTNHlEc" frameborder="0" allowfullscreen></iframe></Col></Row>
-					<Row><Col lg = {12} md = {12} xs = {12}><p>I've recently watched a video of ants at war with each other and it reminded me very much of how I keep getting routed by Colossi+storms or mass battlecruisers+tanks in Starcraft 2.
+					<Row><Col style={{textAlign : "center"}} lg={12} md={12} xs={12}><iframe width="560" height="315" src="https://www.youtube.com/embed/hn0DmTNHlEc" frameborder="0" allowfullscreen></iframe></Col></Row>
+					<Row><Col lg={12} md={12} xs={12}><p>I've recently watched a video of ants at war with each other and it reminded me very much of how I keep getting routed by Colossi+storms or mass battlecruisers+tanks in Starcraft 2.
 					I've decided to add one ant per loss in this manner to this page and remove an ant when I win in these situations. I hope the page doesnt' get infested.</p></Col></Row>
 					{this.organize (3)}
 				</Panel>	
@@ -219,14 +274,14 @@ var Personal = React.createClass({
 				<Panel>
 					{this.panelTitle("Nice Bagel")}
 					<Row>
-						<Col lg = {12} md = {12} xs = {12}>
+						<Col lg={12} md={12} xs={12}>
 							For the Software Development class, my teammates Chuong and Philippe and I are developping a game called Permusion. The goal is rather straightforward: you and other players must enter a maze and exit it. But in our diabolical Shymalanism, we added a few twists! First off, there are periodic blackouts in the maze and when the lights come back on, you'll find that the maze will be QUITE different. And just for kicks, zombies are lurking around so be careful.
 							Fear not though, for there are many items scattered around the maze that you can pick up and craft into useful tools such as flashlights, potions and armour. Further, there will be hats! 
 						</Col>
 					</Row>
 					<br/>
-					<Row style = {{textAlign:"center"}}>
-						<Col lg = {12} md = {12} xs = {12}>
+					<Row style={{textAlign:"center"}}>
+						<Col lg={12} md={12} xs={12}>
 							Check back here to see which ressources we'll be using and our development progress.
 						</Col>
 					</Row>
@@ -234,7 +289,7 @@ var Personal = React.createClass({
 							{this.listify(SOURCES)}
 					  </Panel>
 					<Row>
-						<Col lg = {12} md = {12} xs = {12}>
+						<Col lg={12} md={12} xs={12}>
 							<h2>Development Timeline</h2>
 						</Col>
 					</Row>	
@@ -246,21 +301,21 @@ var Personal = React.createClass({
 		}	
 		
 		return (
-			<div class = "collapse navbar-collapse">
-			<Navbar toggleNavKey = {0} fixedTop brand={<a href = "#main" onClick = {this.handleScreen.bind(null,'main')}>Terrence Ko</a>}>
-		    <Nav eventKey = {0}>
-		      <NavItem eventKey={2} href = "#profile" onClick = {this.handleScreen.bind(null,'profile')}>About Me</NavItem>
+			<div className="collapse navbar-collapse">
+			<Navbar toggleNavKey={0} fixedTop brand={<a href="#main" onClick={this.handleScreen.bind(null,'main')}>Terrence Ko</a>}>
+		    <Nav eventKey={0}>
+		      <NavItem eventKey={2} href="#profile" onClick={this.handleScreen.bind(null,'profile')}>About Me</NavItem>
 		      <DropdownButton eventKey={3} title='Playground'>
-		        <MenuItem eventKey='1' href = "#moebius" onClick = {this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
+		        <MenuItem eventKey='1' href="#moebius" onClick={this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
 		        <MenuItem divider />
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
 		      <DropdownButton eventKey={4} title='Cooking recipes'>
 		      </DropdownButton>
-		      <NavItem eventKey={3} href = "#ants" onClick = {this.handleScreen.bind(null,'ants')}>Ants</NavItem>
-		      <NavItem eventKey={4} href = "http://us.battle.net/sc2/en/profile/2145980/1/newphew/">Starcraft</NavItem>
-		    	<NavItem eventKey={5} href = "#niceBagel" onClick = {this.handleScreen.bind(null,'niceBagel')}>Nice Bagel</NavItem>
-		      <NavItem eventKey={1} href = "#graveyard" onClick = {this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
+		      <NavItem eventKey={3} href="#ants" onClick={this.handleScreen.bind(null,'ants')}>Ants</NavItem>
+		      <NavItem eventKey={4} href="#starcraft" onClick={this.handleScreen.bind(null, 'starcraft')}>Starcraft</NavItem>
+		    	<NavItem eventKey={5} href="#niceBagel" onClick={this.handleScreen.bind(null,'niceBagel')}>Nice Bagel</NavItem>
+		      <NavItem eventKey={1} href="#graveyard" onClick={this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>
 			{screen [this.state.screen]}
