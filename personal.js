@@ -1,7 +1,9 @@
 var SOURCES=[
 	["Virtual Reality Best Practices","https://docs.unrealengine.com/latest/INT/Platforms/VR/ContentSetup/index.html"],
 	["C++ Tutorial", "http://www.cplusplus.com/"],
-	["Unreal Engine","https://www.unrealengine.com/blog"]]
+	["Unreal Engine","https://www.unrealengine.com/blog"],
+	["Unreal Server Guide", "https://wiki.unrealengine.com/Dedicated_Server_Guide_(Windows_%26_Linux)"],
+	["Unreal Source Buil", "https://docs.unrealengine.com/latest/INT/Programming/Development/BuildingUnrealEngine/index.html"]]
 // newphew 490 nickbot 977
 var Date=React.createClass({
 	render: function() {
