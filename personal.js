@@ -302,9 +302,13 @@ var Personal=React.createClass({
 					  	So instead of doing the original project, we signed up for the Ubisoft Game Lab competition and we're now in a team of 8 people.
 					  	Me gusta much since we still get to use this for credit. We're joined by Calem Bendell, Natasha Ukolova, Samson Stannus and David Blader.
 					  	In a dash of deadly proeficiency and efficiency, Calem already started by implementing a menu. We don't even know what the theme of the game will be lol.
-							<img src="http://imgur.com/h9Vtfrp" className ="img-responsive"></img>
+							<br/>
+							<video preload="auto" autoplay="autoplay" muted="muted" loop="loop"  style={{width: 680+'px', height: 329.3900709219858+'px'}}>
+				      	<source src="http://i.imgur.com/h9Vtfrp.gifv" type="video/webm"/>
+				      	<source src="http://i.imgur.com/h9Vtfrp.gifv" type="video/mp4"/>
+						  </video>
+						  PS: embedding acting weird so here's a <a href="http://imgur.com/h9Vtfrp">link</a>
 						</Panel>	
-					  <Panel collapsible header="Planning Phase">
 				</Panel>
 			),
 		}	
