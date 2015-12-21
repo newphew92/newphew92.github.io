@@ -298,6 +298,13 @@ var Personal=React.createClass({
 						<Panel collapsible header="Planning Phase">
 							Writing the report and stuff, really not very fun be have to do it. Hopefully we'll move on to something more interesting.
 					  </Panel>
+					  <Panel collapsible header="Signup for Ubisoft Competition">
+					  	So instead of doing the original project, we signed up for the Ubisoft Game Lab competition and we're now in a team of 8 people.
+					  	Me gusta much since we still get to use this for credit. We're joined by Calem Bendell, Natasha Ukolova, Samson Stannus and David Blader.
+					  	In a dash of deadly proeficiency and efficiency, Calem already started by implementing a menu. We don't even know what the theme of the game will be lol.
+							<img src="http://imgur.com/h9Vtfrp" className ="img-responsive"></img>
+						</Panel>	
+					  <Panel collapsible header="Planning Phase">
 				</Panel>
 			),
 		}	
