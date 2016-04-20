@@ -31,7 +31,7 @@ var Personal=React.createClass({
 		for (var i=1; i<= list.length;i++){
 			b=b.concat(list[i-1])
 			if(i%rowLength === 0||i === list.length){
-				c=c.concat([b]);  
+				c=c.concat([b]);
 				b=[];
 			}
 		}
@@ -85,10 +85,10 @@ var Personal=React.createClass({
 			Col=B.Col;
 
 		return(
-			<div>	
+			<div>
 				<Row><Col lg={12}><h4>{title}</h4><Date date={date}/></Col></Row>
 				<Row><Col lg={12}><p>{content}</p></Col></Row>
-			</div>	
+			</div>
 			)
 	},
 	panelTitle: function (title){
@@ -100,8 +100,8 @@ var Personal=React.createClass({
 					<Col lg={12} md={12} xs={12}>
 							<h1>{title}</h1>
 					</Col>
-				</Row>	
-		)	
+				</Row>
+		)
 	},
 	listify: function (list){
 		var ListGroupItem=ReactBootstrap.ListGroupItem;
@@ -133,9 +133,9 @@ var Personal=React.createClass({
 				<Panel style={{margin:"0%"}}>
 					<Row>
 						<Col lg={10} lgOffset={1}>
-							<p>I was born in Montreal, Canada in 1992. Growing up, I learned how to play the piano and participated in many competitions until I entered CEGEP (pre-university institution in Quebec, the equivalent of the last year of high school and first year of university). 
-							Interested in medical technologies and particularily artificial organs, I enrolled into the program of Anatomy and Cell Biology at Mcgill University. 
-							After a year and a half, I took up programming and felt that I was learning much more. 
+							<p>I was born in Montreal, Canada in 1992. Growing up, I learned how to play the piano and participated in many competitions until I entered CEGEP (pre-university institution in Quebec, the equivalent of the last year of high school and first year of university).
+							Interested in medical technologies and particularily artificial organs, I enrolled into the program of Anatomy and Cell Biology at Mcgill University.
+							After a year and a half, I took up programming and felt that I was learning much more.
 							I thus, decided to switch from a major to two liberal science degrees with concentrations in Anatomy and Cell Biology and Computer Science.</p>
 							<p>I am currently finishing my Bachelor of Science and will graduate in 2016.</p>
 						</Col>
@@ -168,7 +168,7 @@ var Personal=React.createClass({
 				   	</Col>
 				   	<Col lg={1}></Col>
 				  </Row>
-				   </Panel> 
+				   </Panel>
 			),
 			main : (
 				<Panel>
@@ -178,7 +178,7 @@ var Personal=React.createClass({
 							<div id="portrait"><img src="https://raw.githubusercontent.com/newphew92/newphew92.github.io/master/Pictures/smallBinocular.JPG" className ="img-responsive"></img></div>
 						</Col>
 						<Col lg={6} md={6} xs={12}>
-							<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>		
+							<p>Hi there! Welcome to my personal homepage. This is where I will be dumping any web related code as well as interesting stories or information.</p>
 							<p>I will occasionally write some things that I find interesting such as travel blogs, cooking recipes and funny things in general.</p>
 							<p>I originally intended this page to be powered by Node.js and have a login feature (for the gigges) but since I can't be bothered to set up a server, I'll stick to using static pages only.</p>
 							<p>This website is hosted on Github and the repo is public. I'm using React.js for the front-end along with React-Bootstrap spinkled with JQuery.</p>
@@ -194,7 +194,7 @@ var Personal=React.createClass({
 							<p>UPDATE: Haha! Success! Just merely had to manually set the the url, do a little componentDidMount and regex, read the end and set state! Refresh away without loading a new page!</p>
 						</Col>
 					</Row>
-				</Panel>	
+				</Panel>
 			),
 			starcraft: (
 				<Panel>
@@ -205,7 +205,7 @@ var Personal=React.createClass({
 							</video>
 						</Col>
 					</Row>
-					<Row >	
+					<Row >
 						<Col id="starcraft-card" 	centered lg={12} md={12} xs={12}>
 							<div className="character-card card-game-char ajax-update">
 								<div className="message">
@@ -218,14 +218,14 @@ var Personal=React.createClass({
 									<span className="border"></span>
 									<div className="character">
 										<a className="character-name context-link serif " href="http://us.battle.net/sc2/en/profile/2145980/1/newphew/" rel="np">
-											newphew 
+											newphew
 										</a>
-									</div>	
+									</div>
 									<span className="achievement-score">Character Code: 490</span>
 									<span className="icon icon-sc2"></span>
 								</div>
-							</div>	
-						</Col>	
+							</div>
+						</Col>
 					</Row>
 					<Row >
 						<Col id="starcraft-card" 	centered lg={12} md={12} xs={12}>
@@ -240,13 +240,13 @@ var Personal=React.createClass({
 									<span className="border"></span>
 									<div className="character">
 										<a className="character-name context-link serif " href="http://us.battle.net/sc2/en/profile/657826/1/nickbot/" rel="np">
-											nickbot 
+											nickbot
 										</a>
-									</div>	
+									</div>
 									<span className="achievement-score">Character Code: 977</span>
 									<span className="icon icon-sc2"></span>
 								</div>
-							</div>	
+							</div>
 						</Col>
 					</Row>
 				</Panel>
@@ -261,7 +261,7 @@ var Personal=React.createClass({
 					</Row>
 					<br/>
 					<Row style={{textAlign:"center"}}><Col lg={12} md={12} xs={12}>Dave made this (I think?) for his research and I found it quite nice. I'm going to make it manipulable for the lols.</Col></Row>
-				</Panel> 
+				</Panel>
 			),
 			ants:(
 				<Panel>
@@ -270,15 +270,23 @@ var Personal=React.createClass({
 					<Row><Col lg={12} md={12} xs={12}><p>I've recently watched a video of ants at war with each other and it reminded me very much of how I keep getting routed by Colossi+storms or mass battlecruisers+tanks in Starcraft 2.
 					I've decided to add one ant per loss in this manner to this page and remove an ant when I win in these situations. I hope the page doesnt' get infested.</p></Col></Row>
 					{this.organize (3)}
-				</Panel>	
+				</Panel>
 			),
 			niceBagel:(
 				<Panel>
-					{this.panelTitle("Nice Bagel")}
+					{this.panelTitle("Team Alpha")}
+					<Row style={{textAlign:"center"}}>
+						<Col lg={12} md={12} xs={12}>
+							<h1>Announcements</h1>
+						</Col>
+						<Col lg={12} md={12} xs={12}>
+							Meeting tuesday.
+						</Col>
+					</Row>
 					<Row>
 						<Col lg={12} md={12} xs={12}>
 							For the Software Development class, my teammates Chuong and Philippe and I are developping a game called Permusion. The goal is rather straightforward: you and other players must enter a maze and exit it. But in our diabolical Shymalanism, we added a few twists! First off, there are periodic blackouts in the maze and when the lights come back on, you'll find that the maze will be QUITE different. And just for kicks, zombies are lurking around so be careful.
-							Fear not though, for there are many items scattered around the maze that you can pick up and craft into useful tools such as flashlights, potions and armour. Further, there will be hats! 
+							Fear not though, for there are many items scattered around the maze that you can pick up and craft into useful tools such as flashlights, potions and armour. Further, there will be hats!
 						</Col>
 					</Row>
 					<br/>
@@ -294,7 +302,7 @@ var Personal=React.createClass({
 						<Col lg={12} md={12} xs={12}>
 							<h2>Development Timeline</h2>
 						</Col>
-					</Row>	
+					</Row>
 						<Panel collapsible header="Planning Phase">
 							Writing the report and stuff, really not very fun be have to do it. Hopefully we'll move on to something more interesting.
 					  </Panel>
@@ -308,11 +316,29 @@ var Personal=React.createClass({
 				      	<source src="http://i.imgur.com/h9Vtfrp.gifv" type="video/mp4"/>
 						  </video>
 						  PS: embedding acting weird so here's a <a href="http://imgur.com/h9Vtfrp">link</a>
-						</Panel>	
+						</Panel>
 				</Panel>
 			),
-		}	
-		
+			robo:(
+					<Panel>
+						{this.panelTitle("Minecraft as a Testing and Abstraction Framework for Localization Algorithms")}
+						<Row>
+							<Col lg={12} md={12} xs={12}><p>This paper was written for the final project of Comp 417</p></Col>
+							<Col style={{textAlign : "center"}} lg={12} md={12} xs={12}><em><b>Abstract</b></em></Col>
+							<Col style={{textAlign : "center"}} lg={12} md={12} xs={12}>
+								When performing experimental research on robotic platforms with simulators  such as Gazebo (Koenig and Howard 2004), there can be a difficult amount of overhead involved with setting up the work environment which impedes quick testing and iterations of concepts and algorithms.
+								Game engines address this issue as they have more designers and engineers working on simplifying the user experience and providing multi-platform support. BurlapCraft (Aluru et al, 2015), a Minecraft mod that implements the BURLAP library (MacGalshan 2015) was modified as a mean to test the implementation of an abstracted particle filter.
+								The BurlapCraft API exposes a number of functions that allow a user to interface with the game engine and make use of any basic functions that grants control over the robot unit. Minecraft as an Experimental World for AI in Robotics serves as our core paper.
+							</Col>
+							<Col style={{textAlign : "center"}} lg={12} md={12} xs={12}><iframe width="420" height="315" src="https://www.youtube.com/embed/6ZFbQALQ-ek" frameborder="0" allowfullscreen></iframe></Col>
+							<Col lg={12} md={12} xs={12}><p>More on this project <a href="https://www.dropbox.com/s/9e4nriul3bxkbtw/Paper.pdf?dl=0" rel="np">
+								here.
+							</a></p></Col>
+					</Row>
+					</Panel>
+			),
+		}
+
 		return (
 			<div className="collapse navbar-collapse">
 			<Navbar toggleNavKey={0} fixedTop brand={<a href="#main" onClick={this.handleScreen.bind(null,'main')}>Terrence Ko</a>}>
@@ -320,6 +346,7 @@ var Personal=React.createClass({
 		      <NavItem eventKey={2} href="#profile" onClick={this.handleScreen.bind(null,'profile')}>About Me</NavItem>
 		      <DropdownButton eventKey={3} title='Playground'>
 		        <MenuItem eventKey='1' href="#moebius" onClick={this.handleScreen.bind(null,'moebius')}>Moebius Strip by David Kleiman</MenuItem>
+						<MenuItem eventKey='1' href="#robo" onClick={this.handleScreen.bind(null,'robo')}>Minecraft Particle Filter</MenuItem>
 		        <MenuItem divider />
 		        <MenuItem eventKey='3' >Something else here</MenuItem>
 		      </DropdownButton>
@@ -327,7 +354,7 @@ var Personal=React.createClass({
 		      </DropdownButton>
 		      <NavItem eventKey={3} href="#ants" onClick={this.handleScreen.bind(null,'ants')}>Ants</NavItem>
 		      <NavItem eventKey={4} href="#starcraft" onClick={this.handleScreen.bind(null, 'starcraft')}>Starcraft</NavItem>
-		    	<NavItem eventKey={5} href="#niceBagel" onClick={this.handleScreen.bind(null,'niceBagel')}>Nice Bagel</NavItem>
+		    	<NavItem eventKey={5} href="#niceBagel" onClick={this.handleScreen.bind(null,'niceBagel')}>Team Alpha</NavItem>
 		      <NavItem eventKey={1} href="#graveyard" onClick={this.handleScreen.bind(null,'main')}>Graveyard</NavItem>
 		    </Nav>
 	  	</Navbar>
