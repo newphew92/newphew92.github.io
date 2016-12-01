@@ -1,0 +1,52 @@
+{
+  "home": {
+    "title": "Home",
+    "occupation": "Game Developer",
+    "aboutMe": "placeholder"
+  },
+  "CV": {
+      "title": "Curriculum Vitae",
+      "Education": {
+        "McGill": "Bachelor of Science"
+      }
+  },
+  "portfolio":{
+    "title": "Portfolio",
+    "personalProjects": {
+      "burlapCraft": {
+        "title": "BurlapCraft",
+        "content": "blabla",
+        "url": "none",
+        "image": "img/portfolio/burlapcraft.png",
+        "date": "April 20th 2016"
+      },
+      "mcGameJam": {
+        "title": "McGame Jam Website",
+        "content": "A simple single-page website with reload-free language switching for an event",
+        "url": "none",
+        "image": "img/portfolio/mcGameJam.png",
+        "date": "March 16th 2016"
+      },
+      "worship": {
+        "title": "Worship",
+        "content": "3D game prototype with an ocean theme",
+        "url": "none",
+        "image": "img/portfolio/worship.png",
+        "date": "March 24th 2016"
+      },
+      "GoCaml": {
+        "title": "GoCaml",
+        "content": "A Go-lite to Python compiler in OCaml",
+        "url": "none",
+        "image": "img/portfolio/GoCaml.png",
+        "date": "April 20th 2016"
+      }
+    }
+  },
+  "blog": {
+    "turkey": {
+      "content": "put it in the oven",
+      "date": "November 20th 2016"
+    }
+  }
+}
