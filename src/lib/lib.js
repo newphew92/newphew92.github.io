@@ -59,3 +59,11 @@ export function extractUrlExtension() {
   var url=window.location.href.split("/");
   return (url[url.length-1]).replace(/[#]/,"")
 }
+
+export function handleChange(stateName) {
+  return function (event) {
+    var state = {};
+    state[stateName] = event.target ? event.target.value : event;
+    this.setState(state);
+  }.bind(this);
+}

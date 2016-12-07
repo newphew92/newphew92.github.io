@@ -47,7 +47,7 @@ var View = _react2.default.createClass({
 			'div',
 			null,
 			_react2.default.createElement(Main, { data: DATA.home }),
-			_react2.default.createElement(CV, { data: DATA.CV, processModalOpen: this.state.focusPanel === DATA.CV.title }),
+			_react2.default.createElement(CV, { data: DATA.CV }),
 			_react2.default.createElement(Portfolio, { data: DATA.portfolio, focusPanel: this.state.focusPanel })
 		);
 	},
@@ -73,13 +73,6 @@ var Main = _react2.default.createClass({
 		this.setState({
 			home: this.props.data
 		});
-	},
-	handleChange: function handleChange(stateName) {
-		return function (event) {
-			var state = {};
-			state[stateName] = event.target ? event.target.value : event;
-			this.setState(state);
-		}.bind(this);
 	},
 	render: function render() {
 		var homeText = this.state.home;
@@ -119,14 +112,26 @@ var Main = _react2.default.createClass({
 				)
 			),
 			_react2.default.createElement(
-				'h1',
-				null,
-				homeText.title
-			),
-			_react2.default.createElement(
-				'p',
-				null,
-				homeText.aboutMe
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					_reactBootstrap.Row,
+					null,
+					_react2.default.createElement(
+						_reactBootstrap.Col,
+						null,
+						_react2.default.createElement(
+							'h1',
+							{ style: { textAlign: "center" } },
+							homeText.title
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							homeText.aboutMe
+						)
+					)
+				)
 			)
 		);
 	}
@@ -136,48 +141,20 @@ var CV = _react2.default.createClass({
 	displayName: 'CV',
 	getInitialState: function getInitialState() {
 		return {
-			data: undefined,
-			processModalOpen: undefined
+			data: undefined
 		};
 	},
 	componentWillMount: function componentWillMount() {
 		this.setState({
-			data: this.props.data,
-			processModalOpen: this.props.modalOpen
+			data: this.props.data
 		});
 	},
-	handleToggle: function handleToggle() {
-		this.setState({ processModalOpen: !this.state.processModalOpen });
-	},
-	renderProcessModal: function renderProcessModal(show) {
-		return _react2.default.createElement(
-			_reactBootstrap.Modal,
-			{ title: this.state.data.title, onHide: this.handleToggle, show: show, className: 'portfolio-modal modal', tabIndex: '-1', role: 'dialog' },
-			_react2.default.createElement(_appLib.BigX, { handleClick: this.handleToggle }),
-			_react2.default.createElement(
-				_reactBootstrap.Row,
-				null,
-				_react2.default.createElement(
-					_reactBootstrap.Col,
-					{ lg: 12 },
-					_react2.default.createElement(
-						_reactBootstrap.Modal.Body,
-						null,
-						_react2.default.createElement(
-							_reactBootstrap.Button,
-							{ onClick: this.handleToggle },
-							_react2.default.createElement('i', { className: 'fa fa-times' }),
-							' Close'
-						)
-					)
-				)
-			)
-		);
-	},
 	render: function render() {
+		var _this = this;
+
 		return _react2.default.createElement(
 			'div',
-			{ className: 'container' },
+			null,
 			_react2.default.createElement(
 				_reactBootstrap.Row,
 				null,
@@ -187,12 +164,67 @@ var CV = _react2.default.createClass({
 					_react2.default.createElement(
 						'h2',
 						null,
-						_react2.default.createElement('a', { href: "#" + this.state.data.title.replace(/[" "]/g, ""), className: 'portfolio-link', onClick: this.handleToggle })
+						this.state.data.title
 					),
-					_react2.default.createElement('hr', { className: 'star-primary' })
+					_react2.default.createElement('hr', { className: 'star-primary' }),
+					_react2.default.createElement(
+						'p',
+						null,
+						this.state.data.description
+					)
 				)
 			),
-			this.renderProcessModal(this.state.processModalOpen)
+			Object.keys(this.state.data.content).map(function (e1, i) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'container', style: { textAlign: "center" }, key: i },
+					Object.keys(_this.state.data.content[e1]).map(function (e, i) {
+						console.log(e1);
+						console.log(e);
+						return _react2.default.createElement(
+							'div',
+							{ key: i },
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 12 },
+									_react2.default.createElement(
+										'h5',
+										null,
+										e
+									)
+								)
+							),
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									Object.keys(_this.state.data.content[e1][e].details)
+								),
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									_this.state.data.content[e1][e].date
+								)
+							),
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									_this.state.data.content[e1][e].details[Object.keys(_this.state.data.content[e1][e].details)]
+								)
+							),
+							_react2.default.createElement('hr', null)
+						);
+					})
+				);
+			})
 		);
 	}
 });
@@ -213,7 +245,7 @@ var Portfolio = _react2.default.createClass({
 		console.log(this.props.focusPanel);
 	},
 	render: function render() {
-		var _this = this;
+		var _this2 = this;
 
 		return _react2.default.createElement(
 			'section',
@@ -240,7 +272,7 @@ var Portfolio = _react2.default.createClass({
 						_reactBootstrap.Row,
 						{ key: i },
 						e.map(function (e, i) {
-							return _react2.default.createElement(Project, { modalOpen: _this.state.data.personalProjects[e].title.replace(/[" "]/g, "") === _this.state.focusPanel, key: i, project: _this.state.data.personalProjects[e] });
+							return _react2.default.createElement(Project, { modalOpen: _this2.state.data.personalProjects[e].title.replace(/[" "]/g, "") === _this2.state.focusPanel, key: i, project: _this2.state.data.personalProjects[e], size: 4 });
 						})
 					);
 				})
@@ -344,7 +376,7 @@ var Project = _react2.default.createClass({
 			null,
 			_react2.default.createElement(
 				_reactBootstrap.Col,
-				{ sm: 4, className: 'portfolio-item' },
+				{ sm: this.props.size, className: 'portfolio-item' },
 				_react2.default.createElement(
 					'a',
 					{ href: "#" + this.state.project.title.replace(/[" "]/g, ""), className: 'portfolio-link', onClick: this.handleToggle },
@@ -378,7 +410,7 @@ var BlogMenu = _react2.default.createClass({
 		});
 	},
 	render: function render() {
-		var _this2 = this;
+		var _this3 = this;
 
 		return _react2.default.createElement(
 			'div',
@@ -404,7 +436,7 @@ var BlogMenu = _react2.default.createClass({
 							'p',
 							null,
 							_react2.default.createElement('span', { className: 'glyphicon glyphicon-time' }),
-							_this2.state.data[e].date
+							_this3.state.data[e].date
 						),
 						_react2.default.createElement('hr', null),
 						_react2.default.createElement('img', { className: 'img-responsive', src: 'http://placehold.it/900x300', alt: '' }),
@@ -412,7 +444,7 @@ var BlogMenu = _react2.default.createClass({
 						_react2.default.createElement(
 							'p',
 							null,
-							_this2.state.data[e].content
+							_this3.state.data[e].content
 						),
 						_react2.default.createElement(
 							_reactBootstrap.Button,

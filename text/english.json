@@ -1,14 +1,37 @@
 {
   "home": {
-    "title": "Home",
+    "title": "About Me",
     "occupation": "Game Developer",
-    "aboutMe": "placeholder"
+    "aboutMe": "  Hi there and welcome to my revamped website! I'm a game developer working for Ubisoft Montreal. This website was made by taking a free Bootstrap template and replacing its logic with React. Gulp was the template's default package handler so I extended it to suppot JSX files. I hope you like this website!"
   },
   "CV": {
       "title": "Curriculum Vitae",
-      "Education": {
-        "McGill": "Bachelor of Science"
-      }
+      "description": "This is a shortened form of my CV. If you want more details, you can send me an email and I'll send you my beautifully latexed version.",
+      "url" : "none",
+      "image": "img/profile.jpg",
+      "date": "December 1st 2016",
+      "content": {
+        "Education": {
+          "McGill": {
+            "details": {"Bachelor of Science": "Liberal CSC Anat. & Cell Biology and CSC Comp. Sci."},
+            "date": "September 2012-May 2016"
+          },
+          "Collège Jean-de-Brébeuf (cegep)": {
+            "details": {"Diplôme d'Études Collégiales": "Health Sciences"},
+            "date": "September 2010-May 2012"
+          },
+          "Collège Jean-de-Brébeuf (secondaire)": {
+          "details": {"Diplôme d'Études Secondaires": ""},
+          "date": "September 2005-June 2010"
+        }
+        },
+        "Work Experience": {
+          "Ubisoft Montreal": {
+            "details":{"Generalist Programmer. Part of the Online \"Live\" Team.": ""},
+          "date": "May 2016-"
+          }
+        }
+    }
   },
   "portfolio":{
     "title": "Portfolio",

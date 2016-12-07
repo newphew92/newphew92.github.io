@@ -12,6 +12,8 @@ var source = require ('vinyl-source-stream');
 const changed = require ('gulp-changed');
 var b = browserify();
 
+var fastBuild = true;
+
 // Set the banner content
 var banner = ['/*!\n',
     ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
@@ -110,7 +112,8 @@ gulp.task('copy', function() {
 
 // Run everything except copy because this is not the first time running the gulp file.
 //Add copy if this is the first time
-gulp.task('default', ['lib','react', 'browserify', 'less', 'minify-css', 'minify-js']);
+var l = fastBuild ? ['react', 'browserify','minify-js'] : ['lib','react', 'browserify', 'less', 'minify-css', 'minify-js']
+gulp.task('default', l);
 
 // Configure the browserSync task
 gulp.task('browserSync', function() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Row, Col, Modal} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import {NavBar, BigX, organizeGroups, extractUrlExtension} from './appLib';
+import {NavBar, BigX, organizeGroups, extractUrlExtension, handleChange} from './appLib';
 
 var DATA;
 $.ajaxSetup({
@@ -36,7 +36,8 @@ const View = React.createClass({
 		return(
 			<div>
 				<Main data = {DATA.home}/>
-				<CV data = {DATA.CV} processModalOpen = {this.state.focusPanel === DATA.CV.title}/>
+				<CV data = {DATA.CV}/>
+				{/* <Row><Project modalOpen = {"cv" === this.state.focusPanel} project = {this.state.cv}/></Row> */}
 				<Portfolio data = {DATA.portfolio} focusPanel = {this.state.focusPanel}/>
 			</div>
 		)
@@ -65,13 +66,6 @@ const Main = React.createClass({
 			home: this.props.data
 		})
 	},
-  handleChange(stateName) {
-    return function (event) {
-      var state = {};
-      state[stateName] = event.target ? event.target.value : event;
-      this.setState(state);
-    }.bind(this);
-  },
   render (){
     var homeText = this.state.home;
     return (
@@ -90,8 +84,14 @@ const Main = React.createClass({
 		            </Row>
 		        </div>
 		    </header>
-        <h1>{homeText.title}</h1>
-        <p>{homeText.aboutMe}</p>
+				<div className = "container">
+					<Row>
+						<Col>
+			        <h1 style = {{textAlign: "center"}}>{homeText.title}</h1>
+			        <p>{homeText.aboutMe}</p>
+						</Col>
+					</Row>
+				</div>
       </div>
     )
   }
@@ -100,45 +100,58 @@ const Main = React.createClass({
 const CV = React.createClass({
 	getInitialState() {
 		return {
-			data: undefined,
-			processModalOpen: undefined
+			data: undefined
 		}
 	},
 	componentWillMount() {
 		this.setState({
 			data: this.props.data,
-			processModalOpen: this.props.modalOpen
 		})
 	},
-	handleToggle() {
-		this.setState({processModalOpen: !this.state.processModalOpen});
-	},
-	renderProcessModal(show) {
-		return (
-			<Modal title = {this.state.data.title} onHide = {this.handleToggle} show = {show} className="portfolio-modal modal" tabIndex="-1" role="dialog" >
-				<BigX handleClick = {this.handleToggle}/>
-				<Row>
-					<Col lg = {12}>
-						<Modal.Body>
-							<Button onClick = {this.handleToggle}>
-								<i className="fa fa-times"></i> Close
-							</Button>
-						</Modal.Body>
-					</Col>
-				</Row>
-			</Modal>
-		)
-	},
+
 	render() {
 		return (
-			<div className = "container">
-				<Row>
-					<Col lg = {12} style = {{textAlign: "center"}}>
-						<h2><a href = {"#"+this.state.data.title.replace(/[" "]/g,"")}className = "portfolio-link" onClick = {this.handleToggle}></a></h2>
-						<hr className = "star-primary"/>
-					</Col>
-				</Row>
-				{this.renderProcessModal(this.state.processModalOpen)}
+			<div>
+			<Row>
+				<Col lg = {12} style = {{textAlign: "center"}}>
+					<h2>{this.state.data.title}</h2>
+					<hr className="star-primary"/>
+					<p>{this.state.data.description}</p>
+				</Col>
+			</Row>
+					{
+						Object.keys(this.state.data.content).map((e1,i) => {
+							return(
+								<div className = "container" style = {{textAlign: "center"}} key = {i}>
+									{
+										Object.keys(this.state.data.content[e1]).map((e,i) => {
+											console.log(e1);
+											console.log(e);
+											return(
+												<div key = {i}>
+												  <Row><Col lg = {12}><h5>{e}</h5></Col></Row>
+												  <Row>
+												    <Col lg = {6}>
+												      {Object.keys(this.state.data.content[e1][e].details)}
+												    </Col>
+												    <Col lg = {6}>
+												      {this.state.data.content[e1][e].date}
+												    </Col>
+												  </Row>
+												  <Row>
+												    <Col lg = {6}>
+												      {this.state.data.content[e1][e].details[Object.keys(this.state.data.content[e1][e].details)]}
+												    </Col>
+												  </Row>
+												  <hr/>
+												</div>
+											)
+										})
+									}
+								</div>
+							)
+						})
+					}
 			</div>
 		)
 	}
@@ -171,7 +184,7 @@ const Portfolio = React.createClass({
 						{
 							organizeGroups(Object.keys(this.state.data.personalProjects),3).map( (e,i) =>{
 								return <Row key = {i}>{e.map((e,i) => {
-										return <Project modalOpen = {this.state.data.personalProjects[e].title.replace(/[" "]/g,"") === this.state.focusPanel} key = {i} project = {this.state.data.personalProjects[e]}/>;}
+										return <Project modalOpen = {this.state.data.personalProjects[e].title.replace(/[" "]/g,"") === this.state.focusPanel} key = {i} project = {this.state.data.personalProjects[e]} size = {4}/>;}
 								)}</Row>
 							})
 						}
@@ -180,8 +193,6 @@ const Portfolio = React.createClass({
 		)
 	}
 });
-
-
 
 var ProjectInfo = React.createClass({
 	render (){
@@ -238,8 +249,8 @@ var Project = React.createClass({
 	render() {
 		return(
 			<div>
-				<Col sm = {4} className = "portfolio-item">
-					<a href = {"#"+this.state.project.title.replace(/[" "]/g,"")}className = "portfolio-link" onClick = {this.handleToggle}>
+				<Col sm = {this.props.size} className = "portfolio-item">
+					<a href = {"#"+this.state.project.title.replace(/[" "]/g,"")} className = "portfolio-link" onClick = {this.handleToggle}>
 						<div className = "caption">
 							<div className = "caption-content">
 								<i className = "fa fa-search-plus fa-3x"></i>

@@ -38630,7 +38630,7 @@ var View = _react2.default.createClass({
 			'div',
 			null,
 			_react2.default.createElement(Main, { data: DATA.home }),
-			_react2.default.createElement(CV, { data: DATA.CV, processModalOpen: this.state.focusPanel === DATA.CV.title }),
+			_react2.default.createElement(CV, { data: DATA.CV }),
 			_react2.default.createElement(Portfolio, { data: DATA.portfolio, focusPanel: this.state.focusPanel })
 		);
 	},
@@ -38656,13 +38656,6 @@ var Main = _react2.default.createClass({
 		this.setState({
 			home: this.props.data
 		});
-	},
-	handleChange: function handleChange(stateName) {
-		return function (event) {
-			var state = {};
-			state[stateName] = event.target ? event.target.value : event;
-			this.setState(state);
-		}.bind(this);
 	},
 	render: function render() {
 		var homeText = this.state.home;
@@ -38702,14 +38695,26 @@ var Main = _react2.default.createClass({
 				)
 			),
 			_react2.default.createElement(
-				'h1',
-				null,
-				homeText.title
-			),
-			_react2.default.createElement(
-				'p',
-				null,
-				homeText.aboutMe
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement(
+					_reactBootstrap.Row,
+					null,
+					_react2.default.createElement(
+						_reactBootstrap.Col,
+						null,
+						_react2.default.createElement(
+							'h1',
+							{ style: { textAlign: "center" } },
+							homeText.title
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							homeText.aboutMe
+						)
+					)
+				)
 			)
 		);
 	}
@@ -38719,48 +38724,20 @@ var CV = _react2.default.createClass({
 	displayName: 'CV',
 	getInitialState: function getInitialState() {
 		return {
-			data: undefined,
-			processModalOpen: undefined
+			data: undefined
 		};
 	},
 	componentWillMount: function componentWillMount() {
 		this.setState({
-			data: this.props.data,
-			processModalOpen: this.props.modalOpen
+			data: this.props.data
 		});
 	},
-	handleToggle: function handleToggle() {
-		this.setState({ processModalOpen: !this.state.processModalOpen });
-	},
-	renderProcessModal: function renderProcessModal(show) {
-		return _react2.default.createElement(
-			_reactBootstrap.Modal,
-			{ title: this.state.data.title, onHide: this.handleToggle, show: show, className: 'portfolio-modal modal', tabIndex: '-1', role: 'dialog' },
-			_react2.default.createElement(_appLib.BigX, { handleClick: this.handleToggle }),
-			_react2.default.createElement(
-				_reactBootstrap.Row,
-				null,
-				_react2.default.createElement(
-					_reactBootstrap.Col,
-					{ lg: 12 },
-					_react2.default.createElement(
-						_reactBootstrap.Modal.Body,
-						null,
-						_react2.default.createElement(
-							_reactBootstrap.Button,
-							{ onClick: this.handleToggle },
-							_react2.default.createElement('i', { className: 'fa fa-times' }),
-							' Close'
-						)
-					)
-				)
-			)
-		);
-	},
 	render: function render() {
+		var _this = this;
+
 		return _react2.default.createElement(
 			'div',
-			{ className: 'container' },
+			null,
 			_react2.default.createElement(
 				_reactBootstrap.Row,
 				null,
@@ -38770,12 +38747,67 @@ var CV = _react2.default.createClass({
 					_react2.default.createElement(
 						'h2',
 						null,
-						_react2.default.createElement('a', { href: "#" + this.state.data.title.replace(/[" "]/g, ""), className: 'portfolio-link', onClick: this.handleToggle })
+						this.state.data.title
 					),
-					_react2.default.createElement('hr', { className: 'star-primary' })
+					_react2.default.createElement('hr', { className: 'star-primary' }),
+					_react2.default.createElement(
+						'p',
+						null,
+						this.state.data.description
+					)
 				)
 			),
-			this.renderProcessModal(this.state.processModalOpen)
+			Object.keys(this.state.data.content).map(function (e1, i) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'container', style: { textAlign: "center" }, key: i },
+					Object.keys(_this.state.data.content[e1]).map(function (e, i) {
+						console.log(e1);
+						console.log(e);
+						return _react2.default.createElement(
+							'div',
+							{ key: i },
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 12 },
+									_react2.default.createElement(
+										'h5',
+										null,
+										e
+									)
+								)
+							),
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									Object.keys(_this.state.data.content[e1][e].details)
+								),
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									_this.state.data.content[e1][e].date
+								)
+							),
+							_react2.default.createElement(
+								_reactBootstrap.Row,
+								null,
+								_react2.default.createElement(
+									_reactBootstrap.Col,
+									{ lg: 6 },
+									_this.state.data.content[e1][e].details[Object.keys(_this.state.data.content[e1][e].details)]
+								)
+							),
+							_react2.default.createElement('hr', null)
+						);
+					})
+				);
+			})
 		);
 	}
 });
@@ -38796,7 +38828,7 @@ var Portfolio = _react2.default.createClass({
 		console.log(this.props.focusPanel);
 	},
 	render: function render() {
-		var _this = this;
+		var _this2 = this;
 
 		return _react2.default.createElement(
 			'section',
@@ -38823,7 +38855,7 @@ var Portfolio = _react2.default.createClass({
 						_reactBootstrap.Row,
 						{ key: i },
 						e.map(function (e, i) {
-							return _react2.default.createElement(Project, { modalOpen: _this.state.data.personalProjects[e].title.replace(/[" "]/g, "") === _this.state.focusPanel, key: i, project: _this.state.data.personalProjects[e] });
+							return _react2.default.createElement(Project, { modalOpen: _this2.state.data.personalProjects[e].title.replace(/[" "]/g, "") === _this2.state.focusPanel, key: i, project: _this2.state.data.personalProjects[e], size: 4 });
 						})
 					);
 				})
@@ -38927,7 +38959,7 @@ var Project = _react2.default.createClass({
 			null,
 			_react2.default.createElement(
 				_reactBootstrap.Col,
-				{ sm: 4, className: 'portfolio-item' },
+				{ sm: this.props.size, className: 'portfolio-item' },
 				_react2.default.createElement(
 					'a',
 					{ href: "#" + this.state.project.title.replace(/[" "]/g, ""), className: 'portfolio-link', onClick: this.handleToggle },
@@ -38961,7 +38993,7 @@ var BlogMenu = _react2.default.createClass({
 		});
 	},
 	render: function render() {
-		var _this2 = this;
+		var _this3 = this;
 
 		return _react2.default.createElement(
 			'div',
@@ -38987,7 +39019,7 @@ var BlogMenu = _react2.default.createClass({
 							'p',
 							null,
 							_react2.default.createElement('span', { className: 'glyphicon glyphicon-time' }),
-							_this2.state.data[e].date
+							_this3.state.data[e].date
 						),
 						_react2.default.createElement('hr', null),
 						_react2.default.createElement('img', { className: 'img-responsive', src: 'http://placehold.it/900x300', alt: '' }),
@@ -38995,7 +39027,7 @@ var BlogMenu = _react2.default.createClass({
 						_react2.default.createElement(
 							'p',
 							null,
-							_this2.state.data[e].content
+							_this3.state.data[e].content
 						),
 						_react2.default.createElement(
 							_reactBootstrap.Button,
@@ -39018,7 +39050,7 @@ _reactDom2.default.render(_react2.default.createElement(View, null), document.ge
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+  value: true
 });
 exports.BigX = exports.NavBar = undefined;
 
@@ -39026,6 +39058,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.organizeGroups = organizeGroups;
 exports.extractUrlExtension = extractUrlExtension;
+exports.handleChange = handleChange;
 
 var _react = require('react');
 
@@ -39042,130 +39075,138 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NavBar = exports.NavBar = function (_React$Component) {
-		_inherits(NavBar, _React$Component);
+  _inherits(NavBar, _React$Component);
 
-		function NavBar() {
-				_classCallCheck(this, NavBar);
+  function NavBar() {
+    _classCallCheck(this, NavBar);
 
-				return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
-		}
+    return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).apply(this, arguments));
+  }
 
-		_createClass(NavBar, [{
-				key: 'render',
-				value: function render() {
-						return _react2.default.createElement(
-								'nav',
-								{ id: 'mainNav', style: { backgroundColor: "#F29924" }, className: 'navbar navbar-default navbar-fixed-top navbar-custom' },
-								_react2.default.createElement(
-										'div',
-										{ className: 'container' },
-										_react2.default.createElement(
-												'div',
-												{ className: 'navbar-header page-scroll' },
-												_react2.default.createElement(
-														_reactBootstrap.Button,
-														{ className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1' },
-														_react2.default.createElement(
-																'span',
-																{ className: 'sr-only' },
-																'Toggle Navigation'
-														),
-														' Menu ',
-														_react2.default.createElement('i', { className: 'fa fa-bars' })
-												),
-												_react2.default.createElement(
-														'a',
-														{ className: 'navbar-brand', href: '#page-top' },
-														'Terrence Ko'
-												)
-										),
-										_react2.default.createElement(
-												'div',
-												{ className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-												_react2.default.createElement(
-														'ul',
-														{ className: 'nav navbar-nav navbar-right' },
-														_react2.default.createElement(
-																'li',
-																{ className: 'hidden' },
-																_react2.default.createElement('a', { href: '#page-top' })
-														),
-														[_react2.default.createElement(
-																'a',
-																{ href: '#portfolio' },
-																'Portfolio'
-														), _react2.default.createElement(
-																'a',
-																{ href: '#about' },
-																'About'
-														), _react2.default.createElement(
-																'a',
-																{ href: '/blog' },
-																'Blog'
-														), _react2.default.createElement(
-																'a',
-																{ href: '#contact' },
-																'Contact'
-														)].map(function (e, i) {
-																return _react2.default.createElement(
-																		'li',
-																		{ key: i, className: 'page-scroll' },
-																		e
-																);
-														})
-												)
-										)
-								)
-						);
-				}
-		}]);
+  _createClass(NavBar, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'nav',
+        { id: 'mainNav', style: { backgroundColor: "#F29924" }, className: 'navbar navbar-default navbar-fixed-top navbar-custom' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-header page-scroll' },
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1' },
+              _react2.default.createElement(
+                'span',
+                { className: 'sr-only' },
+                'Toggle Navigation'
+              ),
+              ' Menu ',
+              _react2.default.createElement('i', { className: 'fa fa-bars' })
+            ),
+            _react2.default.createElement(
+              'a',
+              { className: 'navbar-brand', href: '#page-top' },
+              'Terrence Ko'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+            _react2.default.createElement(
+              'ul',
+              { className: 'nav navbar-nav navbar-right' },
+              _react2.default.createElement(
+                'li',
+                { className: 'hidden' },
+                _react2.default.createElement('a', { href: '#page-top' })
+              ),
+              [_react2.default.createElement(
+                'a',
+                { href: '#portfolio' },
+                'Portfolio'
+              ), _react2.default.createElement(
+                'a',
+                { href: '#about' },
+                'About'
+              ), _react2.default.createElement(
+                'a',
+                { href: '/blog' },
+                'Blog'
+              ), _react2.default.createElement(
+                'a',
+                { href: '#contact' },
+                'Contact'
+              )].map(function (e, i) {
+                return _react2.default.createElement(
+                  'li',
+                  { key: i, className: 'page-scroll' },
+                  e
+                );
+              })
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-		return NavBar;
+  return NavBar;
 }(_react2.default.Component);
 
 ;
 
 var BigX = exports.BigX = function (_React$Component2) {
-		_inherits(BigX, _React$Component2);
+  _inherits(BigX, _React$Component2);
 
-		function BigX() {
-				_classCallCheck(this, BigX);
+  function BigX() {
+    _classCallCheck(this, BigX);
 
-				return _possibleConstructorReturn(this, (BigX.__proto__ || Object.getPrototypeOf(BigX)).apply(this, arguments));
-		}
+    return _possibleConstructorReturn(this, (BigX.__proto__ || Object.getPrototypeOf(BigX)).apply(this, arguments));
+  }
 
-		_createClass(BigX, [{
-				key: 'render',
-				value: function render() {
-						return _react2.default.createElement(
-								'div',
-								{ className: 'close-modal', onClick: this.props.handleClick },
-								_react2.default.createElement(
-										'div',
-										{ className: 'lr' },
-										_react2.default.createElement('div', { className: 'rl' })
-								)
-						);
-				}
-		}]);
+  _createClass(BigX, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'close-modal', onClick: this.props.handleClick },
+        _react2.default.createElement(
+          'div',
+          { className: 'lr' },
+          _react2.default.createElement('div', { className: 'rl' })
+        )
+      );
+    }
+  }]);
 
-		return BigX;
+  return BigX;
 }(_react2.default.Component);
 
 function organizeGroups(list, rowLength) {
-		var cols = [];var rows = [];
-		for (var i = 1; i <= list.length; i++) {
-				cols = cols.concat(list[i - 1]);
-				if (i % rowLength === 0 || i === list.length) {
-						rows = rows.concat([cols]);
-						cols = [];
-				}
-		}
-		return rows;
+  var cols = [];var rows = [];
+  for (var i = 1; i <= list.length; i++) {
+    cols = cols.concat(list[i - 1]);
+    if (i % rowLength === 0 || i === list.length) {
+      rows = rows.concat([cols]);
+      cols = [];
+    }
+  }
+  return rows;
 }
 
 function extractUrlExtension() {
-		var url = window.location.href.split("/");
-		return url[url.length - 1].replace(/[#]/, "");
+  var url = window.location.href.split("/");
+  return url[url.length - 1].replace(/[#]/, "");
+}
+
+function handleChange(stateName) {
+  return function (event) {
+    var state = {};
+    state[stateName] = event.target ? event.target.value : event;
+    this.setState(state);
+  }.bind(this);
 }
 },{"react":420,"react-bootstrap":246}]},{},[425]);
