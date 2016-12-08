@@ -38618,12 +38618,15 @@ var View = _react2.default.createClass({
 	},
 	componentWillMount: function componentWillMount() {
 		var path = (0, _appLib.extractUrlExtension)();
+		if (path === "blog") {
+			this.setState({ screen: path });
+			// return;
+		}
 		if (!path) {
 			path = "main";
 		}
 		this.setState({ focusPanel: path });
 		// console.log(/.+?(?=\#)/.exec(url))
-		console.log(path);
 	},
 	renderMain: function renderMain() {
 		return _react2.default.createElement(
@@ -38762,8 +38765,6 @@ var CV = _react2.default.createClass({
 					'div',
 					{ className: 'container', style: { textAlign: "center" }, key: i },
 					Object.keys(_this.state.data.content[e1]).map(function (e, i) {
-						console.log(e1);
-						console.log(e);
 						return _react2.default.createElement(
 							'div',
 							{ key: i },
@@ -38825,7 +38826,6 @@ var Portfolio = _react2.default.createClass({
 			data: this.props.data,
 			focusPanel: this.props.focusPanel
 		});
-		console.log(this.props.focusPanel);
 	},
 	render: function render() {
 		var _this2 = this;
@@ -39044,8 +39044,6 @@ var BlogMenu = _react2.default.createClass({
 
 _reactDom2.default.render(_react2.default.createElement(_appLib.NavBar, null), document.getElementById('nav'));
 _reactDom2.default.render(_react2.default.createElement(View, null), document.getElementById('main'));
-// ReactDOM.render(<Main data = {DATA.home}/>, document.getElementById('main'));
-// ReactDOM.render(<Portfolio data = {DATA.portfolio}/>, document.getElementById('portfolio'));
 },{"./appLib":426,"react":420,"react-bootstrap":246,"react-dom":257}],426:[function(require,module,exports){
 'use strict';
 

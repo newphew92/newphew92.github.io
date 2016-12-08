@@ -27,17 +27,19 @@ const View = React.createClass({
 	},
 	componentWillMount() {
 		var path = extractUrlExtension();
-		if (! path){path="main"}
+		if (path === "blog"){
+			this.setState({screen:path})
+			// return;
+		}
+		if (!path){path="main"}
 		this.setState({focusPanel:path})
 		// console.log(/.+?(?=\#)/.exec(url))
-		console.log(path);
 	},
 	renderMain() {
 		return(
 			<div>
 				<Main data = {DATA.home}/>
 				<CV data = {DATA.CV}/>
-				{/* <Row><Project modalOpen = {"cv" === this.state.focusPanel} project = {this.state.cv}/></Row> */}
 				<Portfolio data = {DATA.portfolio} focusPanel = {this.state.focusPanel}/>
 			</div>
 		)
@@ -125,8 +127,6 @@ const CV = React.createClass({
 								<div className = "container" style = {{textAlign: "center"}} key = {i}>
 									{
 										Object.keys(this.state.data.content[e1]).map((e,i) => {
-											console.log(e1);
-											console.log(e);
 											return(
 												<div key = {i}>
 												  <Row><Col lg = {12}><h5>{e}</h5></Col></Row>
@@ -169,7 +169,6 @@ const Portfolio = React.createClass({
 			data: this.props.data,
 			focusPanel: this.props.focusPanel
 		});
-		console.log(this.props.focusPanel);
 	},
 	render() {
 		return (
@@ -299,5 +298,3 @@ var BlogMenu = React.createClass({
 
 ReactDOM.render(<NavBar/>, document.getElementById('nav'));
 ReactDOM.render(<View/>,document.getElementById('main'));
-// ReactDOM.render(<Main data = {DATA.home}/>, document.getElementById('main'));
-// ReactDOM.render(<Portfolio data = {DATA.portfolio}/>, document.getElementById('portfolio'));
