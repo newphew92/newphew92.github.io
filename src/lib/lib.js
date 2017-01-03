@@ -20,7 +20,7 @@ export class NavBar extends React.Component{
 									{
 										[<a href="#portfolio">Portfolio</a>,
 										<a href="#about">About</a>,
-										<a href="/blog">Blog</a>,
+										<a href="#blog">Blog</a>,
 										<a href="#contact">Contact</a>]
 										.map((e, i) => {return <li key = {i} className="page-scroll">{e}</li>})
 									}

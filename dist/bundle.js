@@ -38618,14 +38618,14 @@ var View = _react2.default.createClass({
 	},
 	componentWillMount: function componentWillMount() {
 		var path = (0, _appLib.extractUrlExtension)();
-		if (path === "blog") {
-			this.setState({ screen: path });
-			// return;
+		switch (path) {
+			case "blog":
+				this.setState({ screen: "blog" });
+				break;
+			default:
+				this.setState({ screen: "main" });
+				this.setState({ focusPanel: path });
 		}
-		if (!path) {
-			path = "main";
-		}
-		this.setState({ focusPanel: path });
 		// console.log(/.+?(?=\#)/.exec(url))
 	},
 	renderMain: function renderMain() {
@@ -38989,8 +38989,12 @@ var BlogMenu = _react2.default.createClass({
 	},
 	componentWillMount: function componentWillMount() {
 		this.setState({
+			processModalOpen: false,
 			data: this.props.data
 		});
+	},
+	handleToggle: function handleToggle() {
+		this.setState({ processModalOpen: !this.state.processModalOpen });
 	},
 	render: function render() {
 		var _this3 = this;
@@ -38998,46 +39002,108 @@ var BlogMenu = _react2.default.createClass({
 		return _react2.default.createElement(
 			'div',
 			null,
-			Object.keys(this.state.data).map(function (e, i) {
-				return;
+			_react2.default.createElement(
+				'header',
+				null,
 				_react2.default.createElement(
-					_reactBootstrap.Row,
-					null,
+					'div',
+					{ className: 'container' },
 					_react2.default.createElement(
-						_reactBootstrap.Col,
+						_reactBootstrap.Panel,
+						{ header: "test", eventKey: 0 },
+						'blep'
+					),
+					Object.keys(this.state.data).map(function (e, i) {
+						return _react2.default.createElement(BlogMenuItem, { data: _this3.state.data[e], key: i });
+					})
+				)
+			)
+		);
+	}
+});
+
+var BlogMenuItem = _react2.default.createClass({
+	displayName: 'BlogMenuItem',
+	getInitialState: function getInitialState() {
+		return {
+			data: undefined
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		this.setState({
+			processModalOpen: false,
+			data: this.props.data,
+			expanded: false
+		});
+	},
+	handleToggle: function handleToggle(stateName) {
+		var _this4 = this;
+
+		var state = {};
+		state[stateName] = !this.state[stateName];
+		return function () {
+			_this4.setState(state);
+		};
+		// this.setState({processModalOpen: !this.state.processModalOpen});
+	},
+	renderProcessModal: function renderProcessModal(show, title, content, img, date) {
+		return _react2.default.createElement(
+			_reactBootstrap.Modal,
+			{ title: title, onHide: this.handleToggle("processModalOpen"), show: show, className: 'portfolio-modal modal', tabIndex: '-1', role: 'dialog' },
+			_react2.default.createElement(_appLib.BigX, { handleClick: this.handleToggle("processModalOpen") }),
+			_react2.default.createElement(
+				_reactBootstrap.Row,
+				null,
+				_react2.default.createElement(
+					_reactBootstrap.Col,
+					{ lg: 8, lgOffset: 2 },
+					_react2.default.createElement(
+						_reactBootstrap.Modal.Body,
 						null,
 						_react2.default.createElement(
 							'h2',
 							null,
-							_react2.default.createElement(
-								'a',
-								{ href: '#' },
-								e
-							)
+							title
 						),
+						_react2.default.createElement('hr', { className: 'star-primary' }),
+						_react2.default.createElement('img', { src: img, className: 'img-responsive img-centered', alt: '' }),
 						_react2.default.createElement(
 							'p',
 							null,
-							_react2.default.createElement('span', { className: 'glyphicon glyphicon-time' }),
-							_this3.state.data[e].date
+							content
 						),
-						_react2.default.createElement('hr', null),
-						_react2.default.createElement('img', { className: 'img-responsive', src: 'http://placehold.it/900x300', alt: '' }),
-						_react2.default.createElement('hr', null),
 						_react2.default.createElement(
-							'p',
+							'strong',
 							null,
-							_this3.state.data[e].content
+							date
 						),
 						_react2.default.createElement(
 							_reactBootstrap.Button,
-							null,
-							'Read More',
-							_react2.default.createElement('span', { className: 'glyphicon glyphicon-chevron-right' })
+							{ onClick: this.handleToggle("processModalOpen") },
+							_react2.default.createElement('i', { className: 'fa fa-times' }),
+							' Close'
 						)
 					)
-				);
-			})
+				)
+			)
+		);
+	},
+	render: function render() {
+		return _react2.default.createElement(
+			_reactBootstrap.Panel,
+			{ collapsible: true, header: this.state.data.title, href: '#', expanded: this.state.expanded, onClick: this.handleToggle("expanded") },
+			_react2.default.createElement(
+				'p',
+				{ style: { color: "black" } },
+				this.state.data.summary
+			),
+			_react2.default.createElement(
+				_reactBootstrap.Button,
+				{ onClick: this.handleToggle("processModalOpen") },
+				'Read More',
+				_react2.default.createElement('span', { className: 'glyphicon glyphicon-chevron-right' })
+			),
+			this.renderProcessModal(this.state.processModalOpen, this.state.data.title, this.state.data.content, this.state.data.img, this.state.data.date)
 		);
 	}
 });

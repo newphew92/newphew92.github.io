@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Row, Col, Modal} from 'react-bootstrap';
+import {Button, Row, Col, Modal, Accordion, Panel} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import {NavBar, BigX, organizeGroups, extractUrlExtension, handleChange} from './appLib';
 
@@ -27,12 +27,14 @@ const View = React.createClass({
 	},
 	componentWillMount() {
 		var path = extractUrlExtension();
-		if (path === "blog"){
-			this.setState({screen:path})
-			// return;
+		switch (path) {
+			case "blog":
+				this.setState({screen: "blog"});
+				break;
+			default:
+				this.setState({screen: "main"});
+				this.setState({focusPanel: path})
 		}
-		if (!path){path="main"}
-		this.setState({focusPanel:path})
 		// console.log(/.+?(?=\#)/.exec(url))
 	},
 	renderMain() {
@@ -73,14 +75,14 @@ const Main = React.createClass({
     return (
       <div>
 				<header>
-		        <div className="container">
+		        <div className = "container">
 		            <Row>
 		                <Col lg = {12}>
-		                    <img className="img-responsive" src="img/profile.jpg" alt=""/>
-		                    <div className="intro-text">
-		                        <span className="name">Terrence Ko</span>
-		                        <hr className="star-light"/>
-		                        <span className="skills">{homeText.occupation}</span>
+		                    <img className = "img-responsive" src = "img/profile.jpg" alt = ""/>
+		                    <div className = "intro-text">
+		                        <span className = "name">Terrence Ko</span>
+		                        <hr className = "star-light"/>
+		                        <span className = "skills">{homeText.occupation}</span>
 		                    </div>
 		                </Col>
 		            </Row>
@@ -271,28 +273,82 @@ var BlogMenu = React.createClass({
 	},
 	componentWillMount() {
 		this.setState({
+			processModalOpen: false,
 			data: this.props.data
 		})
+	},
+	handleToggle() {
+		this.setState({processModalOpen: !this.state.processModalOpen});
 	},
 	render() {
 		return(
 			<div>
-				{
-					Object.keys(this.state.data).map((e,i) => {
-						return
-							<Row><Col>
-								<h2><a href="#">{e}</a></h2>
-								<p><span className="glyphicon glyphicon-time"></span>{this.state.data[e].date}</p>
-								<hr/>
-								<img className="img-responsive" src="http://placehold.it/900x300" alt=""/>
-								<hr/>
-								<p>{this.state.data[e].content}</p>
-								<Button>Read More<span className="glyphicon glyphicon-chevron-right"></span></Button>
-							</Col></Row>;
-					})
-				}
+				<header>
+					<div className = "container">
+						<Panel header = {"test"} eventKey = {0}>
+							blep
+						</Panel>
+						{
+							Object.keys(this.state.data).map((e,i) => {
+							 	return(<BlogMenuItem data = {this.state.data[e]} key = {i}/>);
+							})
+						}
+					</div>
+				</header>
 			</div>
 		)
+	}
+});
+
+var BlogMenuItem = React.createClass({
+	getInitialState() {
+		return {
+			data: undefined
+		}
+	},
+	componentWillMount() {
+		this.setState({
+			processModalOpen: false,
+			data: this.props.data,
+			expanded: false
+		})
+	},
+	handleToggle(stateName) {
+		var state = {}
+		state[stateName] = !this.state[stateName]
+		return (
+			() => {this.setState(state)}
+		)
+		// this.setState({processModalOpen: !this.state.processModalOpen});
+	},
+	renderProcessModal(show, title, content, img, date) {
+		return(
+			<Modal title = {title} onHide = {this.handleToggle("processModalOpen")} show = {show} className="portfolio-modal modal" tabIndex="-1" role="dialog" >
+				<BigX handleClick = {this.handleToggle("processModalOpen")}/>
+				<Row>
+					<Col lg = {8} lgOffset = {2}>
+						<Modal.Body>
+							<h2>{title}</h2>
+							<hr className="star-primary"/>
+							<img src = {img} className="img-responsive img-centered" alt=""/>
+							<p>{content}</p>
+							<strong>{date}</strong>
+							<Button onClick = {this.handleToggle("processModalOpen")}>
+								<i className="fa fa-times"></i> Close
+							</Button>
+						</Modal.Body>
+					</Col>
+				</Row>
+			</Modal>
+		)
+	},
+	render(){
+		return(
+			<Panel collapsible header = {this.state.data.title} href="#" expanded = {this.state.expanded} onClick = {this.handleToggle("expanded")}>
+			<p style = {{color: "black"}}>{this.state.data.summary}</p>
+			<Button onClick = {this.handleToggle("processModalOpen")}>Read More<span className="glyphicon glyphicon-chevron-right"></span></Button>
+			{this.renderProcessModal(this.state.processModalOpen, this.state.data.title, this.state.data.content, this.state.data.img, this.state.data.date)}
+			</Panel>)
 	}
 });
 

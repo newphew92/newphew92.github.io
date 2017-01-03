@@ -68,8 +68,18 @@
   },
   "blog": {
     "turkey": {
-      "content": "put it in the oven",
+      "title": "How to Cook Tender Turkey for Christmas",
+      "summary": "The instructions for this roast recipe will require far more time than your ordinary recipes but you will never run the risk of dryness unlike them.",
+      "content": "The total prep work and cooking time should take around 9 hours for a 14lbs turkey. Brining isn't necessary for tenderness in this version but could bring in more flavour.",
+      "img": "",
       "date": "November 20th 2016"
+    },
+    "squash":{
+      "title": "About Spaghetti Squashes",
+      "summary": "Extremely versatile and easy to store vegetable",
+      "content": "",
+      "img": "",
+      "date": ""
     }
   }
 }
