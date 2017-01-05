@@ -285,9 +285,6 @@ var BlogMenu = React.createClass({
 			<div>
 				<header>
 					<div className = "container">
-						<Panel header = {"test"} eventKey = {0}>
-							blep
-						</Panel>
 						{
 							Object.keys(this.state.data).map((e,i) => {
 							 	return(<BlogMenuItem data = {this.state.data[e]} key = {i}/>);
@@ -319,9 +316,12 @@ var BlogMenuItem = React.createClass({
 		return (
 			() => {this.setState(state)}
 		)
-		// this.setState({processModalOpen: !this.state.processModalOpen});
 	},
 	renderProcessModal(show, title, content, img, date) {
+		console.log('modal')
+		console.log(typeof content)
+		console.log(content.map((e) =>{return e}))
+		console.log('endmodal')
 		return(
 			<Modal title = {title} onHide = {this.handleToggle("processModalOpen")} show = {show} className="portfolio-modal modal" tabIndex="-1" role="dialog" >
 				<BigX handleClick = {this.handleToggle("processModalOpen")}/>
@@ -331,7 +331,7 @@ var BlogMenuItem = React.createClass({
 							<h2>{title}</h2>
 							<hr className="star-primary"/>
 							<img src = {img} className="img-responsive img-centered" alt=""/>
-							<p>{content}</p>
+							{content.map((e,i) => {return (<p key = {i}>{e}</p>)})}
 							<strong>{date}</strong>
 							<Button onClick = {this.handleToggle("processModalOpen")}>
 								<i className="fa fa-times"></i> Close
@@ -343,6 +343,8 @@ var BlogMenuItem = React.createClass({
 		)
 	},
 	render(){
+		// console.log(typeof this.state.data.content)
+		// console.log(this.state.data.content.map((e)=>{return e}))
 		return(
 			<Panel collapsible header = {this.state.data.title} href="#" expanded = {this.state.expanded} onClick = {this.handleToggle("expanded")}>
 			<p style = {{color: "black"}}>{this.state.data.summary}</p>

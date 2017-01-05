@@ -84,7 +84,7 @@ var NavBar = exports.NavBar = function (_React$Component) {
                 'About'
               ), _react2.default.createElement(
                 'a',
-                { href: '/blog' },
+                { href: '#blog' },
                 'Blog'
               ), _react2.default.createElement(
                 'a',

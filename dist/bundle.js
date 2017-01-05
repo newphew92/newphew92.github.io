@@ -38583,6 +38583,8 @@ module.exports = warning;
 },{"_process":159}],425:[function(require,module,exports){
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -39008,11 +39010,6 @@ var BlogMenu = _react2.default.createClass({
 				_react2.default.createElement(
 					'div',
 					{ className: 'container' },
-					_react2.default.createElement(
-						_reactBootstrap.Panel,
-						{ header: "test", eventKey: 0 },
-						'blep'
-					),
 					Object.keys(this.state.data).map(function (e, i) {
 						return _react2.default.createElement(BlogMenuItem, { data: _this3.state.data[e], key: i });
 					})
@@ -39044,9 +39041,14 @@ var BlogMenuItem = _react2.default.createClass({
 		return function () {
 			_this4.setState(state);
 		};
-		// this.setState({processModalOpen: !this.state.processModalOpen});
 	},
 	renderProcessModal: function renderProcessModal(show, title, content, img, date) {
+		console.log('modal');
+		console.log(typeof content === 'undefined' ? 'undefined' : _typeof(content));
+		console.log(content.map(function (e) {
+			return e;
+		}));
+		console.log('endmodal');
 		return _react2.default.createElement(
 			_reactBootstrap.Modal,
 			{ title: title, onHide: this.handleToggle("processModalOpen"), show: show, className: 'portfolio-modal modal', tabIndex: '-1', role: 'dialog' },
@@ -39067,11 +39069,13 @@ var BlogMenuItem = _react2.default.createClass({
 						),
 						_react2.default.createElement('hr', { className: 'star-primary' }),
 						_react2.default.createElement('img', { src: img, className: 'img-responsive img-centered', alt: '' }),
-						_react2.default.createElement(
-							'p',
-							null,
-							content
-						),
+						content.map(function (e, i) {
+							return _react2.default.createElement(
+								'p',
+								{ key: i },
+								e
+							);
+						}),
 						_react2.default.createElement(
 							'strong',
 							null,
@@ -39089,6 +39093,8 @@ var BlogMenuItem = _react2.default.createClass({
 		);
 	},
 	render: function render() {
+		// console.log(typeof this.state.data.content)
+		// console.log(this.state.data.content.map((e)=>{return e}))
 		return _react2.default.createElement(
 			_reactBootstrap.Panel,
 			{ collapsible: true, header: this.state.data.title, href: '#', expanded: this.state.expanded, onClick: this.handleToggle("expanded") },
@@ -39197,7 +39203,7 @@ var NavBar = exports.NavBar = function (_React$Component) {
                 'About'
               ), _react2.default.createElement(
                 'a',
-                { href: '/blog' },
+                { href: '#blog' },
                 'Blog'
               ), _react2.default.createElement(
                 'a',
