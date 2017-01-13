@@ -18,10 +18,10 @@ export class NavBar extends React.Component{
 											<a href="#page-top"></a>
 									</li>
 									{
-										[<a href="#portfolio">Portfolio</a>,
-										<a href="#about">About</a>,
-										<a href="#blog">Blog</a>,
-										<a href="#contact">Contact</a>]
+										[<a href="#portfolio" onClick = {this.props.handleChange.bind(null, "portfolio")}>Portfolio</a>,
+										<a href="#home" onClick = {this.props.handleChange.bind(null, "home")}>Home</a>,
+										<a href="#blog" onClick = {this.props.handleChange.bind(null, "blog")}>Blog</a>,
+										<a href="#contact" onClick = {this.props.handleChange.bind(null, "contact")}>Contact</a>]
 										.map((e, i) => {return <li key = {i} className="page-scroll">{e}</li>})
 									}
 							</ul>

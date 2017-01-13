@@ -76,19 +76,19 @@ var NavBar = exports.NavBar = function (_React$Component) {
               ),
               [_react2.default.createElement(
                 'a',
-                { href: '#portfolio' },
+                { href: '#portfolio', onClick: this.props.handleChange.bind(null, "portfolio") },
                 'Portfolio'
               ), _react2.default.createElement(
                 'a',
-                { href: '#about' },
-                'About'
+                { href: '#home', onClick: this.props.handleChange.bind(null, "home") },
+                'Home'
               ), _react2.default.createElement(
                 'a',
-                { href: '#blog' },
+                { href: '#blog', onClick: this.props.handleChange.bind(null, "blog") },
                 'Blog'
               ), _react2.default.createElement(
                 'a',
-                { href: '#contact' },
+                { href: '#contact', onClick: this.props.handleChange.bind(null, "contact") },
                 'Contact'
               )].map(function (e, i) {
                 return _react2.default.createElement(

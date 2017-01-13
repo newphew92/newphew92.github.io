@@ -18,23 +18,34 @@ $.getJSON( "../text/english.json"+'?', { cache: false},function() {})
 	.always(function() {
 	});
 
-const View = React.createClass({
+var View = React.createClass({
 	getInitialState(){
 		return {
 			screen: "main",
 			focusPanel: undefined,
 		}
 	},
-	componentWillMount() {
-		var path = extractUrlExtension();
-		switch (path) {
+	setScreen(view) {
+		switch (view) {
 			case "blog":
 				this.setState({screen: "blog"});
 				break;
 			default:
 				this.setState({screen: "main"});
-				this.setState({focusPanel: path})
+				this.setState({focusPanel: view});
 		}
+	},
+	display (page) {
+			console.log("testing");
+			if (page != null){
+				this.setScreen(page);
+				return;
+			}
+			page = extractUrlExtension();
+			this.setScreen(page);
+	},
+	componentWillMount() {
+		this.display(extractUrlExtension())
 		// console.log(/.+?(?=\#)/.exec(url))
 	},
 	renderMain() {
@@ -55,7 +66,10 @@ const View = React.createClass({
 			"blog" : this.renderBlog()
 		}
 		return (
-			screen[this.state.screen]
+			<div>
+			<NavBar handleChange = {this.display}/>
+			{screen[this.state.screen]}
+			</div>
 		)
 	}
 });
@@ -318,10 +332,6 @@ var BlogMenuItem = React.createClass({
 		)
 	},
 	renderProcessModal(show, title, content, img, date) {
-		console.log('modal')
-		console.log(typeof content)
-		console.log(content.map((e) =>{return e}))
-		console.log('endmodal')
 		return(
 			<Modal title = {title} onHide = {this.handleToggle("processModalOpen")} show = {show} className="portfolio-modal modal" tabIndex="-1" role="dialog" >
 				<BigX handleClick = {this.handleToggle("processModalOpen")}/>
@@ -354,5 +364,5 @@ var BlogMenuItem = React.createClass({
 	}
 });
 
-ReactDOM.render(<NavBar/>, document.getElementById('nav'));
+// ReactDOM.render(<NavBar/>, document.getElementById('nav'));
 ReactDOM.render(<View/>,document.getElementById('main'));

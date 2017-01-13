@@ -12,7 +12,7 @@ var source = require ('vinyl-source-stream');
 const changed = require ('gulp-changed');
 var b = browserify();
 
-var fastBuild = true;
+var fastBuild = false;
 
 // Set the banner content
 var banner = ['/*!\n',

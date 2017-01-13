@@ -2,7 +2,7 @@
   "home": {
     "title": "About Me",
     "occupation": "Game Developer",
-    "aboutMe": "  Hi there and welcome to my revamped website! I'm a game developer working for Ubisoft Montreal. This website was made by taking a free Bootstrap template and replacing its logic with React. Gulp was the template's default package handler so I extended it to suppot JSX files. I hope you like this website!"
+    "aboutMe": "  Hi there and welcome to my revamped website! If you're on this website, then I suppose that you know quite a bit about me. For those who don't, I'm just a guy who used to study Anatomy and Cell Biology (hated it and felt like I was wasting my time) and decided to start programming in 2014. After browsing very many dank memes on programming, I participated in Ubisoft's Game Lab competition. Thanks to this competition, I am able to work at Ubisoft Montreal as a programmer and it's totally awesome. You'll find my projects here as well as some random protip blog posts that I've written. This website was made by taking a free Bootstrap template and replacing its logic with React. Gulp was the template's default package handler so I extended it to suppot JSX files. I hope you like this website!"
   },
   "CV": {
       "title": "Curriculum Vitae",

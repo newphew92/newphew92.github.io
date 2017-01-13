@@ -38583,8 +38583,6 @@ module.exports = warning;
 },{"_process":159}],425:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -38618,16 +38616,27 @@ var View = _react2.default.createClass({
 			focusPanel: undefined
 		};
 	},
-	componentWillMount: function componentWillMount() {
-		var path = (0, _appLib.extractUrlExtension)();
-		switch (path) {
+	setScreen: function setScreen(view) {
+		switch (view) {
 			case "blog":
 				this.setState({ screen: "blog" });
 				break;
 			default:
 				this.setState({ screen: "main" });
-				this.setState({ focusPanel: path });
+				this.setState({ focusPanel: view });
 		}
+	},
+	display: function display(page) {
+		console.log("testing");
+		if (page != null) {
+			this.setScreen(page);
+			return;
+		}
+		page = (0, _appLib.extractUrlExtension)();
+		this.setScreen(page);
+	},
+	componentWillMount: function componentWillMount() {
+		this.display((0, _appLib.extractUrlExtension)());
 		// console.log(/.+?(?=\#)/.exec(url))
 	},
 	renderMain: function renderMain() {
@@ -38647,7 +38656,12 @@ var View = _react2.default.createClass({
 			"main": this.renderMain(),
 			"blog": this.renderBlog()
 		};
-		return screen[this.state.screen];
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement(_appLib.NavBar, { handleChange: this.display }),
+			screen[this.state.screen]
+		);
 	}
 });
 var Main = _react2.default.createClass({
@@ -39043,12 +39057,6 @@ var BlogMenuItem = _react2.default.createClass({
 		};
 	},
 	renderProcessModal: function renderProcessModal(show, title, content, img, date) {
-		console.log('modal');
-		console.log(typeof content === 'undefined' ? 'undefined' : _typeof(content));
-		console.log(content.map(function (e) {
-			return e;
-		}));
-		console.log('endmodal');
 		return _react2.default.createElement(
 			_reactBootstrap.Modal,
 			{ title: title, onHide: this.handleToggle("processModalOpen"), show: show, className: 'portfolio-modal modal', tabIndex: '-1', role: 'dialog' },
@@ -39114,7 +39122,7 @@ var BlogMenuItem = _react2.default.createClass({
 	}
 });
 
-_reactDom2.default.render(_react2.default.createElement(_appLib.NavBar, null), document.getElementById('nav'));
+// ReactDOM.render(<NavBar/>, document.getElementById('nav'));
 _reactDom2.default.render(_react2.default.createElement(View, null), document.getElementById('main'));
 },{"./appLib":426,"react":420,"react-bootstrap":246,"react-dom":257}],426:[function(require,module,exports){
 'use strict';
@@ -39195,19 +39203,19 @@ var NavBar = exports.NavBar = function (_React$Component) {
               ),
               [_react2.default.createElement(
                 'a',
-                { href: '#portfolio' },
+                { href: '#portfolio', onClick: this.props.handleChange.bind(null, "portfolio") },
                 'Portfolio'
               ), _react2.default.createElement(
                 'a',
-                { href: '#about' },
-                'About'
+                { href: '#home', onClick: this.props.handleChange.bind(null, "home") },
+                'Home'
               ), _react2.default.createElement(
                 'a',
-                { href: '#blog' },
+                { href: '#blog', onClick: this.props.handleChange.bind(null, "blog") },
                 'Blog'
               ), _react2.default.createElement(
                 'a',
-                { href: '#contact' },
+                { href: '#contact', onClick: this.props.handleChange.bind(null, "contact") },
                 'Contact'
               )].map(function (e, i) {
                 return _react2.default.createElement(
